@@ -6,6 +6,7 @@ session_start();
  * Valider les deux champs
  */
 $email = '';
+$vemail = '';
 if (array_key_exists('email', $_REQUEST)) {
     $email = trim($_REQUEST['email']);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -13,6 +14,14 @@ if (array_key_exists('email', $_REQUEST)) {
     }
 } else {
     $_SESSION['errors']['email'] = 'L’email est requis';
+}
+if (array_key_exists('vemail', $_REQUEST)) {
+    $vemail = trim($_REQUEST['vemail']);
+    if ($email !== $vemail) {
+        $_SESSION['errors']['vemail'] = 'L’email doit être confirmé';
+    }
+} else {
+    $_SESSION['errors']['email'] = 'L’email de confirmation est requis';
 }
 
 /*
