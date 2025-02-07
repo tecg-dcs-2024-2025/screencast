@@ -1,20 +1,29 @@
 <?php
+
 session_start();
 
 /*
  * Valider les deux champs
  */
+$email = '';
+if (array_key_exists('email', $_REQUEST)) {
+    $email = trim($_REQUEST['email']);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['errors']['email'] = 'L’email doit être un email';
+    }
+} else {
+    $_SESSION['errors']['email'] = 'L’email est requis';
+}
 
 /*
  * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
  */
 
-if(!is_null($_SESSION['errors'])){
+if (!is_null($_SESSION['errors'])) {
     $_SESSION['old'] = $_REQUEST;
     header('Location: /index.php');
     exit;
 }
-
 
 
 /*
@@ -33,11 +42,11 @@ if(!is_null($_SESSION['errors'])){
         <title>Récupitulatif</title>
     </head>
     <body>
-    <h1>Récapitulatif des données soumises</h1>
+        <h1>Récapitulatif des données soumises</h1>
         <dl>
             <div>
                 <dt>Email&nbsp;:</dt>
-                <dd><?= $_REQUEST['email'] ?></dd>
+                <dd><?= $email ?></dd>
             </div>
         </dl>
     </body>
