@@ -28,7 +28,7 @@ if (array_key_exists('vemail', $_REQUEST)) {
  * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
  */
 
-if (!is_null($_SESSION['errors'])) {
+if (isset($_SESSION['errors'])) {
     $_SESSION['old'] = $_REQUEST;
     header('Location: /index.php');
     exit;
