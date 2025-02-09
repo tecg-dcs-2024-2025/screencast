@@ -21,7 +21,7 @@ if (array_key_exists('vemail', $_REQUEST)) {
         $_SESSION['errors']['vemail'] = 'L’email doit être confirmé';
     }
 } else {
-    $_SESSION['errors']['email'] = 'L’email de confirmation est requis';
+    $_SESSION['errors']['vemail'] = 'L’email de confirmation est requis';
 }
 
 /*
