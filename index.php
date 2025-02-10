@@ -38,7 +38,7 @@ session_start() ?>
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div>
-                        <label for="email">*Email</label>
+                        <label for="email"><abbr title="requis">*</abbr>&nbsp;Email</label>
                         <input type="email"
                                name="email"
                                id="email"
@@ -55,7 +55,8 @@ session_start() ?>
                     <?php
                     endif; ?>
                     <div>
-                        <label for="vemail">*Retapez votre email une seconde fois</label>
+                        <label for="vemail"><abbr title="requis">*</abbr>&nbsp;Retapez votre email une seconde
+                                                                         fois</label>
                         <input type="email"
                                name="vemail"
                                id="vemail"
