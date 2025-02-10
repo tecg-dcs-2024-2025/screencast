@@ -30,6 +30,8 @@ session_start() ?>
                   href="/favicon-16x16.png">
             <link rel="manifest"
                   href="/site.webmanifest">
+            <link rel="stylesheet"
+                  href="/css/main.css">
         </head>
         <body>
             <h1>Déclaration de perte d'animal</h1>
