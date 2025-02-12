@@ -26,8 +26,17 @@ if (array_key_exists('vemail', $_REQUEST)) {
     $_SESSION['errors']['vemail'] = 'L’email de confirmation est requis';
 }
 
-if (array_key_exists('country', $_REQUEST) && !array_key_exists($_REQUEST['country'], $countries)) {
+if (array_key_exists('country', $_REQUEST) &&
+    !array_key_exists($_REQUEST['country'], $countries)) {
     $_SESSION['errors']['country'] = 'Le pays sélectionné n’est pas pris en charge par notre application';
+}
+
+if (array_key_exists('phone', $_REQUEST) &&
+    (
+        strlen($_REQUEST['phone']) < 9 ||
+        !is_numeric(str_replace(['+', '(', ')', ' '], '', $_REQUEST['phone']))
+    )) {
+    $_SESSION['errors']['phone'] = 'Le format du téléphone n’est pas reconnu';
 }
 
 /*
