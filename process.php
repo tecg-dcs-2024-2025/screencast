@@ -2,6 +2,8 @@
 
 session_start();
 
+$countries = require './config/countries.php';
+
 /*
  * Valider les deux champs
  */
@@ -24,14 +26,19 @@ if (array_key_exists('vemail', $_REQUEST)) {
     $_SESSION['errors']['vemail'] = 'L’email de confirmation est requis';
 }
 
-/*
- * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
- */
+if (array_key_exists('country', $_REQUEST) && !array_key_exists($_REQUEST['country'], $countries)) {
+    $_SESSION['errors']['country'] = 'Le pays sélectionné n’est pas pris en charge par notre application';
+}
 
-if (isset($_SESSION['errors'])) {
-    $_SESSION['old'] = $_REQUEST;
-    header('Location: /index.php');
-    exit;
+/*
+* S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
+*/
+{
+    if (isset($_SESSION['errors'])) {
+        $_SESSION['old'] = $_REQUEST;
+        header('Location: /index.php');
+        exit;
+    }
 }
 
 
