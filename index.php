@@ -39,6 +39,7 @@ session_start() ?>
                   method="post">
                 <fieldset>
                     <legend>Vos coordonnées</legend>
+                    <!-- Email field -->
                     <div>
                         <label for="email"><abbr title="requis">*</abbr>&nbsp;Email</label>
                         <input type="email"
@@ -56,6 +57,7 @@ session_start() ?>
                         <div><p><?= $_SESSION['errors']['email'] ?></p></div>
                     <?php
                     endif; ?>
+                    <!-- Email verification -->
                     <div>
                         <label for="vemail"><abbr title="requis">*</abbr>&nbsp;Retapez votre email une seconde
                                                                          fois</label>
@@ -74,6 +76,25 @@ session_start() ?>
                         <div><p><?= $_SESSION['errors']['vemail'] ?></p></div>
                     <?php
                     endif; ?>
+                    <!-- Phone number -->
+                    <div>
+                        <label for="phone">Téléphone</label>
+                        <input type="tel"
+                               name="phone"
+                               id="phone"
+                            <?php
+                            if (isset($_SESSION['old']['phone'])): ?>
+                                value="<?= $_SESSION['old']['phone'] ?>"
+                            <?php
+                            endif; ?>
+                        >
+                    </div>
+                    <?php
+                    if (isset($_SESSION['errors']['phone'])): ?>
+                        <div><p><?= $_SESSION['errors']['phone'] ?></p></div>
+                    <?php
+                    endif; ?>
+                    <!-- Country -->
                 </fieldset>
                 <button type="submit">Déclarer mon animal</button>
             </form>
