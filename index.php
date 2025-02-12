@@ -95,6 +95,20 @@ session_start() ?>
                     <?php
                     endif; ?>
                     <!-- Country -->
+                    <div>
+                        <label for="country">Pays</label>
+                        <select name="country"
+                                id="country">
+                            <option value="BE">Belgique</option>
+                            <option value="FR">France</option>
+                            <option value="LU">Luxembourg</option>
+                        </select>
+                    </div>
+                    <?php
+                    if (isset($_SESSION['errors']['country'])): ?>
+                        <div><p><?= $_SESSION['errors']['country'] ?></p></div>
+                    <?php
+                    endif; ?>
                 </fieldset>
                 <button type="submit">Déclarer mon animal</button>
             </form>
