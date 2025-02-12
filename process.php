@@ -1,43 +1,24 @@
 <?php
 
 session_start();
+$_SESSION['errors'] = null;
+$_SESSION['old'] = null;
 
 $countries = require './config/countries.php';
+require './core/validation.php';
 
 /*
  * Valider les deux champs
  */
 $email = '';
 $vemail = '';
-if (array_key_exists('email', $_REQUEST)) {
-    $email = trim($_REQUEST['email']);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $_SESSION['errors']['email'] = 'L’email doit être un email';
-    }
-} else {
-    $_SESSION['errors']['email'] = 'L’email est requis';
-}
-if (array_key_exists('vemail', $_REQUEST)) {
-    $vemail = trim($_REQUEST['vemail']);
-    if ($email !== $vemail) {
-        $_SESSION['errors']['vemail'] = 'L’email doit être confirmé';
-    }
-} else {
-    $_SESSION['errors']['vemail'] = 'L’email de confirmation est requis';
-}
 
-if (array_key_exists('country', $_REQUEST) &&
-    !array_key_exists($_REQUEST['country'], $countries)) {
-    $_SESSION['errors']['country'] = 'Le pays sélectionné n’est pas pris en charge par notre application';
-}
-
-if (array_key_exists('phone', $_REQUEST) &&
-    (
-        strlen($_REQUEST['phone']) < 9 ||
-        !is_numeric(str_replace(['+', '(', ')', ' '], '', $_REQUEST['phone']))
-    )) {
-    $_SESSION['errors']['phone'] = 'Le format du téléphone n’est pas reconnu';
-}
+check_required('email');
+check_required('vemail');
+check_email('email');
+check_phone('phone');
+check_same('vemail', 'email');
+check_in_collection('country', 'countries', $countries);
 
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
