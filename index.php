@@ -42,84 +42,90 @@ $countries = require './config/countries.php';
                   method="post">
                 <fieldset>
                     <legend>Vos coordonnées</legend>
-                    <!-- Email field -->
-                    <div>
-                        <label for="email"><abbr title="requis">*</abbr>&nbsp;Email</label>
-                        <input type="email"
-                               name="email"
-                               id="email"
+                    <div class="fields">
+                        <!-- Email field -->
+                        <div class="field">
+                            <label for="email"><abbr title="requis">*</abbr>&nbsp;Email</label>
+                            <input type="email"
+                                   name="email"
+                                   id="email"
+                                   placeholder="jean@valjean.net"
+                                <?php
+                                if (isset($_SESSION['old']['email'])): ?>
+                                    value="<?= $_SESSION['old']['email'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
                             <?php
-                            if (isset($_SESSION['old']['email'])): ?>
-                                value="<?= $_SESSION['old']['email'] ?>"
-                            <?php
-                            endif; ?>
-                               required>
-                    </div>
-                    <?php
-                    if (isset($_SESSION['errors']['email'])): ?>
-                        <div><p><?= $_SESSION['errors']['email'] ?></p></div>
-                    <?php
-                    endif; ?>
-                    <!-- Email verification -->
-                    <div>
-                        <label for="vemail"><abbr title="requis">*</abbr>&nbsp;Retapez votre email une seconde
-                                                                         fois</label>
-                        <input type="email"
-                               name="vemail"
-                               id="vemail"
-                            <?php
-                            if (isset($_SESSION['old']['vemail'])): ?>
-                                value="<?= $_SESSION['old']['vemail'] ?>"
+                            if (isset($_SESSION['errors']['email'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['email'] ?></p></div>
                             <?php
                             endif; ?>
-                               required>
-                    </div>
-                    <?php
-                    if (isset($_SESSION['errors']['vemail'])): ?>
-                        <div><p><?= $_SESSION['errors']['vemail'] ?></p></div>
-                    <?php
-                    endif; ?>
-                    <!-- Phone number -->
-                    <div>
-                        <label for="phone">Téléphone</label>
-                        <input type="tel"
-                               name="phone"
-                               id="phone"
+                        </div>
+
+                        <!-- Email verification -->
+                        <div class="field">
+                            <label for="vemail"><abbr title="requis">*</abbr>&nbsp;Vérification de l’email</label>
+                            <input type="email"
+                                   name="vemail"
+                                   id="vemail"
+                                <?php
+                                if (isset($_SESSION['old']['vemail'])): ?>
+                                    value="<?= $_SESSION['old']['vemail'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
                             <?php
-                            if (isset($_SESSION['old']['phone'])): ?>
-                                value="<?= $_SESSION['old']['phone'] ?>"
+                            if (isset($_SESSION['errors']['vemail'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['vemail'] ?></p></div>
                             <?php
                             endif; ?>
-                        >
-                    </div>
-                    <?php
-                    if (isset($_SESSION['errors']['phone'])): ?>
-                        <div><p><?= $_SESSION['errors']['phone'] ?></p></div>
-                    <?php
-                    endif; ?>
-                    <!-- Country -->
-                    <div>
-                        <label for="country">Pays</label>
-                        <select name="country"
-                                id="country">
+
+                        </div>
+                        <!-- Phone number -->
+                        <div class="field">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel"
+                                   name="phone"
+                                   id="phone"
+                                   placeholder="+32 (0)4 279 75 01"
+                                <?php
+                                if (isset($_SESSION['old']['phone'])): ?>
+                                    value="<?= $_SESSION['old']['phone'] ?>"
+                                <?php
+                                endif; ?>
+                            >
                             <?php
-                            foreach ($countries as $code => $name): ?>
-                                <option value="<?= $code ?>"
-                                    <?php
-                                    if (isset($_SESSION['old']['country']) && $code === $_SESSION['old']['country']): ?>
-                                        selected
-                                    <?php
-                                    endif; ?>
-                                ><?= $name ?></option>
+                            if (isset($_SESSION['errors']['phone'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['phone'] ?></p></div>
                             <?php
-                            endforeach; ?>
-                        </select>
+                            endif; ?>
+
+                        </div>
+                        <!-- Country -->
+                        <div class="field">
+                            <label for="country">Pays</label>
+                            <select name="country"
+                                    id="country">
+                                <?php
+                                foreach ($countries as $code => $name): ?>
+                                    <option value="<?= $code ?>"
+                                        <?php
+                                        if (isset($_SESSION['old']['country']) && $code === $_SESSION['old']['country']): ?>
+                                            selected
+                                        <?php
+                                        endif; ?>
+                                    ><?= $name ?></option>
+                                <?php
+                                endforeach; ?>
+                            </select>
+                            <?php
+                            if (isset($_SESSION['errors']['country'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['country'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
                     </div>
-                    <?php
-                    if (isset($_SESSION['errors']['country'])): ?>
-                        <div><p><?= $_SESSION['errors']['country'] ?></p></div>
-                    <?php
-                    endif; ?>
                 </fieldset>
                 <button type="submit">Déclarer mon animal</button>
             </form>
