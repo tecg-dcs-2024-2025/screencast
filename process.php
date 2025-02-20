@@ -1,4 +1,5 @@
 <?php
+
 require './vendor/autoload.php';
 
 use Tecgdcs\Validator;
@@ -16,22 +17,18 @@ $messages = require './lang/fr/validation.php';
 $email = '';
 $vemail = '';
 
-Validator::required('email');
-Validator::required('vemail');
-Validator::email('email');
-Validator::phone('phone');
-Validator::same('vemail', 'email');
-Validator::in_collection('country', 'countries', $countries);
+Validator::check([
+    'email' => 'required|email',
+    'vemail' => 'required|same:email',
+    'phone' => 'phone',
+    'country' => 'in_collection:countries',
+]);
 
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
 */
 {
-    if (isset($_SESSION['errors'])) {
-        $_SESSION['old'] = $_REQUEST;
-        header('Location: /index.php');
-        exit;
-    }
+
 }
 
 

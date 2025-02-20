@@ -1,4 +1,5 @@
 <?php
+
 namespace Tecgdcs;
 
 class Validator
@@ -75,6 +76,26 @@ class Validator
         }
 
         return true;
+    }
+
+    public static function check(array $rules)
+    {
+        self::parse_constraints($rules);
+
+        //Analyser les contraintes définies dans l’array
+        //À partir de cette analyse appeler les méthodes de validation correspondantes
+
+        if (isset($_SESSION['errors'])) {
+            $_SESSION['old'] = $_REQUEST;
+            header('Location: /index.php');
+            exit;
+        }
+    }
+
+    private static function parse_constraints(array $rules): false
+    {
+        // Analyser les $rules
+        return false;
     }
 }
 
