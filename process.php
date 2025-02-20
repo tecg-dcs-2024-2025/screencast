@@ -5,7 +5,8 @@ $_SESSION['errors'] = null;
 $_SESSION['old'] = null;
 
 $countries = require './config/countries.php';
-require './core/validation.php';
+$messages = require './lang/fr/validation.php';
+require './core/Validator.php';
 
 /*
  * Valider les deux champs
@@ -13,12 +14,12 @@ require './core/validation.php';
 $email = '';
 $vemail = '';
 
-check_required('email');
-check_required('vemail');
-check_email('email');
-check_phone('phone');
-check_same('vemail', 'email');
-check_in_collection('country', 'countries', $countries);
+Validator::required('email');
+Validator::required('vemail');
+Validator::email('email');
+Validator::phone('phone');
+Validator::same('vemail', 'email');
+Validator::in_collection('country', 'countries', $countries);
 
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
