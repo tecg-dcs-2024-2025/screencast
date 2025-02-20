@@ -1,4 +1,5 @@
 <?php
+namespace Tecgdcs;
 
 class Validator
 {

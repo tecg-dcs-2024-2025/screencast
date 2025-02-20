@@ -1,4 +1,7 @@
 <?php
+require './vendor/autoload.php';
+
+use Tecgdcs\Validator;
 
 session_start();
 $_SESSION['errors'] = null;
@@ -6,7 +9,6 @@ $_SESSION['old'] = null;
 
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
-require './core/Validator.php';
 
 /*
  * Valider les deux champs

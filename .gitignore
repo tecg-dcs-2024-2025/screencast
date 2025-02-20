@@ -110,3 +110,5 @@ Temporary Items
 .idea/php.xml
 .idea/screencast.iml
 .idea/vcs.xml
+
+/vendor/
