@@ -189,8 +189,7 @@ $pet_types = require './config/pet_types.php';
                                 if (isset($_SESSION['old']['pet-chip'])): ?>
                                     value="<?= $_SESSION['old']['pet-chip'] ?>"
                                 <?php
-                                endif; ?>
-                                   required>
+                                endif; ?>>
                             <?php
                             if (isset($_SESSION['errors']['pet-chip'])): ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-chip'] ?></p></div>
@@ -245,8 +244,7 @@ $pet_types = require './config/pet_types.php';
                                 if (isset($_SESSION['old']['pet-age'])): ?>
                                     value="<?= $_SESSION['old']['pet-age'] ?>"
                                 <?php
-                                endif; ?>
-                                   required>
+                                endif; ?>>
                             <?php
                             if (isset($_SESSION['errors']['pet-age'])): ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-age'] ?></p></div>
@@ -265,8 +263,7 @@ $pet_types = require './config/pet_types.php';
                                 if (isset($_SESSION['old']['pet-race'])): ?>
                                     value="<?= $_SESSION['old']['pet-race'] ?>"
                                 <?php
-                                endif; ?>
-                                   required>
+                                endif; ?>>
                             <?php
                             if (isset($_SESSION['errors']['pet-race'])): ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-race'] ?></p></div>
