@@ -3,6 +3,7 @@
 session_start();
 
 $countries = require './config/countries.php';
+$pet_types = require './config/pet_types.php';
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -127,7 +128,299 @@ $countries = require './config/countries.php';
                         </div>
                     </div>
                 </fieldset>
-                <button type="submit">Déclarer mon animal</button>
+
+                <fieldset>
+                    <legend>Description de l‘animal disparu</legend>
+                    <div class="fields">
+
+                        <!-- Pet Type -->
+                        <div class="field">
+                            <label for="pet-type">Type d’animal</label>
+                            <select name="pet-type"
+                                    id="pet-type">
+                                <?php
+                                foreach ($pet_types as $type => $pet_type): ?>
+                                    <option value="<?= $type ?>"
+                                        <?php
+                                        if (isset($_SESSION['old']['pet-type']) && $type === $_SESSION['old']['pet-type']): ?>
+                                            selected
+                                        <?php
+                                        endif; ?>
+                                    ><?= $pet_type ?></option>
+                                <?php
+                                endforeach; ?>
+                            </select>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-type'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-type'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                        <!-- Pet Name -->
+                        <div class="field">
+                            <label for="pet-name"><abbr title="requis">*</abbr>&nbsp;Nom de l’animal</label>
+                            <input type="pet-name"
+                                   name="pet-name"
+                                   id="pet-name"
+                                   placeholder="Rex"
+                                <?php
+                                if (isset($_SESSION['old']['pet-name'])): ?>
+                                    value="<?= $_SESSION['old']['pet-name'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-name'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-name'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                        <!-- Pet chip -->
+                        <div class="field">
+                            <label for="pet-chip">Puce
+                                <br><small>Obligatoire pour les chiens</small>
+                            </label>
+                            <input type="text"
+                                   name="pet-chip"
+                                   id="pet-chip"
+                                <?php
+                                if (isset($_SESSION['old']['pet-chip'])): ?>
+                                    value="<?= $_SESSION['old']['pet-chip'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-chip'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-chip'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                        <!-- Pet Gender -->
+                        <div class="field row-radio">
+                            <p>Sexe</p>
+                            <input type="radio"
+                                   name="pet-gender"
+                                   id="pet-gender-female"
+                                   value="female"
+                                <?php
+                                if (isset($_SESSION['old']['pet-gender']) && $_SESSION['old']['pet-gender'] === 'female'): ?>
+                                    checked
+                                <?php
+                                endif; ?>
+                            ><label for="pet-gender-female">Femelle</label>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-gender'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-gender'] ?></p></div>
+                            <?php
+                            endif; ?>
+                            <input type="radio"
+                                   name="pet-gender"
+                                   id="pet-gender-male"
+                                   value="male"
+                                <?php
+                                if (isset($_SESSION['old']['pet-gender']) && $_SESSION['old']['pet-gender'] === 'male'): ?>
+                                    checked
+                                <?php
+                                endif; ?>
+                            ><label for="pet-gender-male">Male</label>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-gender'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-gender'] ?></p></div>
+                            <?php
+                            endif; ?>
+
+                        </div>
+                        <!-- Pet Age -->
+                        <div class="field">
+                            <label for="pet-age">Âge de l’animal
+                                <br><small>approximativement en années</small></label>
+                            <input type="number"
+                                   name="pet-age"
+                                   id="pet-age"
+                                   placeholder="5"
+                                <?php
+                                if (isset($_SESSION['old']['pet-age'])): ?>
+                                    value="<?= $_SESSION['old']['pet-age'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-age'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-age'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                        <!-- Pet Race -->
+                        <div class="field">
+                            <label for="pet-race">Race de l’animal</label>
+                            <input type="text"
+                                   name="pet-race"
+                                   id="pet-race"
+                                   placeholder="Caniche"
+                                <?php
+                                if (isset($_SESSION['old']['pet-race'])): ?>
+                                    value="<?= $_SESSION['old']['pet-race'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-race'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-race'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                        <!-- Pet tatoo -->
+                        <div class="field row-radio">
+                            <label for="pet-tatoo-location">Tatouage</label>
+                            <select name="pet-tatoo-location"
+                                    id="pet-tatoo-location">
+                                <option value="left-ear">Oreille gauche</option>
+                                <option value="right-ear">Oreille droite</option>
+                                <option value="mouth">Bouche</option>
+                            </select>
+                            <label for="pet-tatoo">Code</label>
+                            <input type="text"
+                                   name="pet-tatoo"
+                                   id="pet-tatoo"
+                                   placeholder="898HH0">
+                        </div>
+
+                        <!-- Pet Description -->
+                        <div class="field">
+                            <label for="pet-description">Description / Signes particuliers</label>
+                            <textarea name="pet-description"
+                                      id="pet-description"
+                                      rows="10"
+                                      placeholder="C’est un bon gamin"><?php
+                                if (isset($_SESSION['old']['pet-description'])): ?><?= $_SESSION['old']['pet-description'] ?><?php
+                                endif; ?></textarea>
+                            <?php
+                            if (isset($_SESSION['errors']['pet-description'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['pet-description'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                        <!-- Pet Race -->
+                        <div class="field">
+                            <label for="pet-picture">Photo de l’animal</label>
+                            <input type="file"
+                                   name="pet-picture"
+                                   id="pet-picture">
+                            <?php
+                            if (isset($_SESSION['errors']['pet-picture'])): ?>
+                                <div class="error">
+                                    <p><?= $_SESSION['errors']['pet-picture'] ?></p>
+                                </div>
+                            <?php
+                            elseif (!empty($_SESSION['errors'])): ?>
+                                <div class="error">
+                                    <p>Il faut resélectionner l’image que vous aviez choisie, sinon, elle sera
+                                       perdue.</p>
+                                </div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Date et localité de la disparition</legend>
+                    <div class="fields">
+                        <!-- Date field -->
+                        <div class="field">
+                            <label for="disparition-date">Date de la disparition<br><small>année/mois/jour ou sélection
+                                                                                           dans le
+                                                                                           calendrier</small></label>
+                            <input type="date"
+                                   name="disparition-date"
+                                   id="disparition-date"
+                                <?php
+                                if (isset($_SESSION['old']['disparition-date'])): ?>
+                                    value="<?= $_SESSION['old']['disparition-date'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
+                            <?php
+                            if (isset($_SESSION['errors']['disparition-date'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['disparition-date'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+
+
+                        <!-- Disparition time -->
+                        <div class="field">
+                            <label for="disparition-time">Heure
+                                <br><small>heures:minutes ou sélection de l’heure</small></label>
+                            <input type="time"
+                                   name="disparition-time"
+                                   id="disparition-time"
+                                <?php
+                                if (isset($_SESSION['old']['disparition-time'])): ?>
+                                    value="<?= $_SESSION['old']['disparition-time'] ?>"
+                                <?php
+                                endif; ?>
+                            >
+                            <?php
+                            if (isset($_SESSION['errors']['disparition-time'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['disparition-time'] ?></p></div>
+                            <?php
+                            endif; ?>
+
+                        </div>
+                        <!-- Disparition postal code -->
+                        <div class="field">
+                            <label for="disparition-postal-code">Code postal</label>
+                            <input type="text"
+                                   name="disparition-postal-code"
+                                   id="disparition-postal-code"
+                                   placeholder="4000"
+                                <?php
+                                if (isset($_SESSION['old']['disparition-postal-code'])): ?>
+                                    value="<?= $_SESSION['old']['disparition-postal-code'] ?>"
+                                <?php
+                                endif; ?>
+                                   required>
+                            <?php
+                            if (isset($_SESSION['errors']['disparition-postal-code'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['disparition-postal-code'] ?></p></div>
+                            <?php
+                            endif; ?>
+
+                        </div>
+
+                        <!-- Disparition Country -->
+                        <div class="field">
+                            <label for="disparition-country">Pays</label>
+                            <select name="disparition-country"
+                                    id="disparition-country">
+                                <?php
+                                foreach ($countries as $code => $name): ?>
+                                    <option value="<?= $code ?>"
+                                        <?php
+                                        if (isset($_SESSION['old']['disparition-country']) && $code === $_SESSION['old']['disparition-country']): ?>
+                                            selected
+                                        <?php
+                                        endif; ?>
+                                    ><?= $name ?></option>
+                                <?php
+                                endforeach; ?>
+                            </select>
+                            <?php
+                            if (isset($_SESSION['errors']['disparition-country'])): ?>
+                                <div class="error"><p><?= $_SESSION['errors']['disparition-country'] ?></p></div>
+                            <?php
+                            endif; ?>
+                        </div>
+                    </div>
+                </fieldset>
+                <button type="submit">Déclarer la perte de mon animal</button>
             </form>
         </body>
     </html>
