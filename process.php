@@ -11,6 +11,7 @@ $_SESSION['old'] = null;
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
 
+
 /*
  * Valider les deux champs
  */
