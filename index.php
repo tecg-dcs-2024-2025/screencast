@@ -4,6 +4,8 @@ session_start();
 
 $countries = require './config/countries.php';
 $pet_types = require './config/pet_types.php';
+require './core/helpers/function.php';
+
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -41,6 +43,7 @@ $pet_types = require './config/pet_types.php';
             <h1>Déclaration de perte d'animal</h1>
             <form action="/process.php"
                   method="post">
+                <?php csrf(); ?> <!-- ajoute l'input hidden et le token -->
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div class="fields">
