@@ -2,6 +2,7 @@
 
 namespace Tecgdcs;
 
+
 class Validator
 {
 
@@ -78,9 +79,9 @@ class Validator
         return true;
     }
 
-    public static function check(array $rules)
+    public static function check(array $rules, array $countries)
     {
-        self::parse_constraints($rules);
+        self::parse_constraints($rules,$countries);
 
         //Analyser les contraintes définies dans l’array
         //À partir de cette analyse appeler les méthodes de validation correspondantes
@@ -92,10 +93,30 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $rules, array $countries): void
     {
-        // Analyser les $rules
-        return false;
+
+        foreach ($rules as $fieldName => $rule) { // Je boucle le tableau Validator::check qui est rules
+            $datas = explode('|', $rule); // ici, je sépare required et email, j'obtiens un nouveau tableau
+            foreach ($datas as $to_call) {
+                if (method_exists(__CLASS__, $to_call)) { //je vérifie qu'il y ait bien une méthode (__CLASS__ est une constante magique qui contient le nom de la classe actuelle)
+                    self::$to_call($fieldName);// self:: permet d'appeler des méthodes statiques dans la même classe.
+                } else if ($to_call === "same:email") { // je vérifie le cas de la vérification
+                    $data = explode(':', $to_call); // je sépare same:email
+                    foreach ($data as $call) {
+                        if (method_exists(__CLASS__, $call)) {
+                            self::$call($fieldName, 'email'); //On a besoin ici de deux valeurs
+                        }
+                    }
+                } else if ($to_call === "in_collection:countries") {  // je vérifie le cas du choix du pays
+                    $data = explode(':', $to_call);
+                    if (method_exists(__CLASS__, $data[0])) {
+                        self::in_collection($fieldName, 'email', $countries); // j'ai rajouté le tableau des pays dans Validator::check pour l'utiliser ici
+                    }
+                }
+            }
+
+        }
     }
 }
 

@@ -10,7 +10,6 @@ $_SESSION['old'] = null;
 
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
-
 /*
  * Valider les deux champs
  */
@@ -22,7 +21,7 @@ Validator::check([
     'vemail' => 'required|same:email',
     'phone' => 'phone',
     'country' => 'in_collection:countries',
-]);
+], require __DIR__ . '/config/countries.php');
 
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
