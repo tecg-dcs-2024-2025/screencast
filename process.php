@@ -1,7 +1,7 @@
 <?php
 
 require './vendor/autoload.php';
-require './core/helpers/csrf.php';
+require './core/helpers/functions.php';
 
 use Tecgdcs\Validator;
 

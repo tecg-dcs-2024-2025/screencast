@@ -1,5 +1,5 @@
 <?php
-require './core/helpers/csrf.php';
+require './core/helpers/functions.php';
 
 session_start();
 $countries = require './config/countries.php';
