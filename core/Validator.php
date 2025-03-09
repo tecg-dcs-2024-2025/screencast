@@ -78,7 +78,7 @@ class Validator
         return true;
     }
 
-    public static function check(array $rules)
+    public static function check(array $rules):void
     {
         self::parse_constraints($rules);
 
@@ -92,10 +92,21 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $rules):bool
     {
         // Analyser les $rules
+        if ($rules){
+            foreach ($rules as $rule => $categories){
+
+                $cat = explode("|", $categories);
+                foreach ($cat as $category){
+                    if (method_exists(Validator::class, $category)){
+                        self::$category($rule);
+                    }
+                }
+            }
+            return true;
+        }
         return false;
     }
 }
-
