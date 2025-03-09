@@ -1,6 +1,7 @@
 <?php
 
 require './vendor/autoload.php';
+require './core/helpers/functions.php';
 
 use Tecgdcs\Validator;
 
@@ -10,6 +11,8 @@ $_SESSION['old'] = null;
 
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
+
+csrf_validator();
 
 /*
  * Valider les deux champs
