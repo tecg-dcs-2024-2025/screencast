@@ -95,6 +95,7 @@ class Validator
     private static function parse_constraints(array $rules): false
     {
         // Analyser les $rules
+
         return false;
     }
 }
