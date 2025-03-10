@@ -97,7 +97,7 @@ class Validator
         foreach ($rules as $name => $rule){
             $parsed_rules = explode("|", $rule);
             foreach ($parsed_rules as $parsed_rule){
-                if (method_exists(Validator::class, $parsed_rule)) {
+                if (method_exists(__FILE__, $parsed_rule)) {
                     self::$parsed_rule($name);
                 }
             }
