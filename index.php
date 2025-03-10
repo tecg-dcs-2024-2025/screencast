@@ -41,7 +41,7 @@ $pet_types = require './config/pet_types.php';
             <h1>Déclaration de perte d'animal</h1>
             <form action="/process.php"
                   method="post">
-                  <?php generate_hidden_input_element();?>
+                  <?php csrf();?>
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div class="fields">

@@ -1,6 +1,6 @@
 <?php
 
-function generate_hidden_input_element(){
+function csrf(){
     $token = bin2hex(random_bytes(32));
     $_SESSION['csrf_token'] = $token;
 
