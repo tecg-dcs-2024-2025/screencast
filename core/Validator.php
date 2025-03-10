@@ -92,10 +92,19 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $rules): void
     {
+
         // Analyser les $rules
-        return false;
+        foreach ($rules as $name => $rule) {
+            $parsed_rules = explode('|', $rule);
+            foreach ($parsed_rules as $parsed_rule) {
+                if (method_exists(self::class, $parsed_rule)) {
+                    self::$parsed_rule($name);
+                }
+            }
+        }
+
     }
 }
 
