@@ -1,19 +1,22 @@
 <?php
 
 require './vendor/autoload.php';
+require './core/helpers/functions.php';
+
 
 use Tecgdcs\Validator;
 
 session_start();
+
+
 $_SESSION['errors'] = null;
 $_SESSION['old'] = null;
 
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
 
-/*
- * Valider les deux champs
- */
+
+
 $email = '';
 $vemail = '';
 
@@ -24,12 +27,7 @@ Validator::check([
     'country' => 'in_collection:countries',
 ]);
 
-/*
-* S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
-*/
-{
-
-}
+csrf_validator();
 
 
 /*

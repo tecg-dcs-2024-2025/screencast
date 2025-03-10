@@ -92,10 +92,24 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $rules): void
     {
-        // Analyser les $rules
-        return false;
+
+        foreach ($rules as $fieldName => $rule) {
+            $datas = explode("|", $rule);
+            foreach ($datas as $to_call) {
+                if (method_exists(Validator::class, $to_call)) {
+                    self::$to_call($fieldName);
+                } else if ($to_call === "same:email") {
+                    $infos = explode(':', $to_call);
+                    foreach ($infos as $info) {
+                        if (method_exists(Validator::class, $info)) {
+                            self::$info($fieldName, 'email');
+                        }
+                    } // il manque la vérification pour les pays, mais je bloque...
+                }
+            }
+        }
     }
 }
 
