@@ -26,17 +26,11 @@ Validator::check([
 ]);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') { // Vérifie la méthode du form
-    if ($_SESSION['token'] && $_POST['csrf_token']) { // Vérifie que les 2 tokens existent
-        if ($_SESSION['token'] === $_POST['csrf_token']) { // Vérifie que les 2 tokens sont égaux
-            echo 'Le token est bon';
-        } else {
-            die();
-        }
-    } else {
+    if ($_SESSION['token'] !== $_POST['csrf_token']) {
         die();
     }
 } else {
-    die();
+    echo 'Le token est bon';
 }
 
 
