@@ -2,11 +2,27 @@
 
 require './vendor/autoload.php';
 
+$bytes = random_bytes(32);
+$_SESSION['csrf_token'] = bin2hex($bytes);
+var_dump($_SESSION['csrf_token']);
+var_dump($_POST['csrf_token']);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('erreur');
+    } else {
+        echo 'test';
+    }
+}
+
+
 use Tecgdcs\Validator;
 
 session_start();
 $_SESSION['errors'] = null;
 $_SESSION['old'] = null;
+
+var_dump($_SESSION['csrf_token']);
 
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
