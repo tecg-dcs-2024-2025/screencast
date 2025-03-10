@@ -1,6 +1,8 @@
 <?php
 
+
 session_start();
+require_once 'core/helpers/functions.php';
 
 $countries = require './config/countries.php';
 $pet_types = require './config/pet_types.php';
@@ -40,7 +42,8 @@ $pet_types = require './config/pet_types.php';
         <body>
             <h1>Déclaration de perte d'animal</h1>
             <form action="/process.php"
-                  method="post">
+                  method="POST" enctype="multipart/form-data">
+                <?php csrf_token() ?>
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div class="fields">
