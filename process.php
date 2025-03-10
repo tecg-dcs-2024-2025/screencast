@@ -11,6 +11,16 @@ $_SESSION['old'] = null;
 $countries = require './config/countries.php';
 $messages = require './lang/fr/validation.php';
 
+if (isset($_POST['_csrf']) && $_POST['_csrf'] !== $_SESSION['csrf_token']) {
+    die("CSRF Token mismatch!");
+}
+
+if (!isset($_POST['_csrf'])) {
+    die("Pas de token envoyé");
+}
+
+unset($_SESSION['csrf_token']);
+
 /*
  * Valider les deux champs
  */
