@@ -76,7 +76,7 @@ Validator::check([
         <dl>
             <div>
                 <dt>Email&nbsp;:</dt>
-                <dd><?= $email ?></dd>
+                <dd><?= $_REQUEST['email']; ?></dd>
             </div>
         </dl>
     </body>
