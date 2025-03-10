@@ -83,6 +83,7 @@ class Validator
         self::parse_constraints($rules);
 
         //Analyser les contraintes définies dans l’array
+
         //À partir de cette analyse appeler les méthodes de validation correspondantes
 
         if (isset($_SESSION['errors'])) {
