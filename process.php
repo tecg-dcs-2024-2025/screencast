@@ -2,9 +2,11 @@
 
 require './vendor/autoload.php';
 
-use Tecgdcs\Validator;
+use  Tecgdcs\Animal\Validator;
 
 session_start();
+$csrf_token = require './core/helpers/functions.php';
+$_SESSION['csrf'] = null;
 $_SESSION['errors'] = null;
 $_SESSION['old'] = null;
 
@@ -17,13 +19,18 @@ $messages = require './lang/fr/validation.php';
 $email = '';
 $vemail = '';
 
-Validator::check([
+/*Validator::check([
     'email' => 'required|email',
     'vemail' => 'required|same:email',
     'phone' => 'phone',
     'country' => 'in_collection:countries',
-]);
+]);*/
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        die('Vérification du Token invalide');
+    }
+}
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
 */
@@ -35,7 +42,6 @@ Validator::check([
 /*
  * Assurer le rendu récapitulatif des données soumises
  */
-
 ?>
 <!doctype html>
 <html lang="fr">

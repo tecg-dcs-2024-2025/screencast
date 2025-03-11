@@ -4,6 +4,7 @@ session_start();
 
 $countries = require './config/countries.php';
 $pet_types = require './config/pet_types.php';
+require './core/helpers/functions.php';
 ?>
     <!DOCTYPE html>
     <html lang="fr">
@@ -41,6 +42,7 @@ $pet_types = require './config/pet_types.php';
             <h1>Déclaration de perte d'animal</h1>
             <form action="/process.php"
                   method="post">
+                <?php echo csrf();?>
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div class="fields">
@@ -424,3 +426,5 @@ $pet_types = require './config/pet_types.php';
 <?php
 $_SESSION['errors'] = null;
 $_SESSION['old'] = null;
+$_SESSION['csrf'] = null;
+
