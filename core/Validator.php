@@ -78,12 +78,20 @@ class Validator
         return true;
     }
 
-    public static function check(array $rules)
+    public static function check(array $rules): void
     {
-        self::parse_constraints($rules);
 
         //Analyser les contraintes définies dans l’array
+        $constraints = self::parse_constraints($rules);
+
         //À partir de cette analyse appeler les méthodes de validation correspondantes
+        foreach ($constraints as $field => $validators) {
+            foreach ($validators as $validator) {
+                if (method_exists(self::class, $validator)) {
+                    self::$validator($field);
+                }
+            }
+        }
 
         if (isset($_SESSION['errors'])) {
             $_SESSION['old'] = $_REQUEST;
@@ -92,10 +100,20 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $rules): void
     {
         // Analyser les $rules
-        return false;
+        foreach ($rules as $field => $constraints) {
+            $validators = explode('|', $constraints);
+
+            foreach ($validators as $validator) {
+                $validator_name = explode(':', $validator);
+            }
+
+            if (method_exists(self::class, $validator_name)) {
+                self::$validator_name($field);
+            }
+        }
     }
 }
 
