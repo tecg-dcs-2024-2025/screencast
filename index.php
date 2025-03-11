@@ -41,6 +41,7 @@ $pet_types = require './config/pet_types.php';
             <h1>Déclaration de perte d'animal</h1>
             <form action="/process.php"
                   method="post">
+                <?php echo Tecgdcs\helpers\Csrf::generateToken() ?>
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div class="fields">
