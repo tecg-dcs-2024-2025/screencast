@@ -1,6 +1,7 @@
 <?php
 
 require './vendor/autoload.php';
+require './core/helpers/functions.php';
 
 use Tecgdcs\Validator;
 
@@ -23,6 +24,8 @@ Validator::check([
     'phone' => 'phone',
     'country' => 'in_collection:countries',
 ]);
+
+validate_csrf();
 
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
