@@ -1,6 +1,6 @@
 <?php
 
-namespace Tecgdcs;
+namespace Tecgdcs\Animal;
 
 class Validator
 {
@@ -90,11 +90,20 @@ class Validator
             header('Location: /index.php');
             exit;
         }
+        return true;
     }
 
     private static function parse_constraints(array $rules): false
     {
         // Analyser les $rules
+        foreach ($rules as $fieldName => $rule) {
+            $datas = explode('|', $rule);
+            foreach ($datas as $data) {
+                if (method_exists(__CLASS__, $data)) {
+                    self::$data($rule);
+                }
+            }
+        }
         return false;
     }
 }

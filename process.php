@@ -2,7 +2,7 @@
 
 require './vendor/autoload.php';
 
-use  Tecgdcs\Animal\Validator;
+use Tecgdcs\Animal\Validator;
 
 session_start();
 $csrf_token = require './core/helpers/functions.php';
@@ -19,12 +19,12 @@ $messages = require './lang/fr/validation.php';
 $email = '';
 $vemail = '';
 
-/*Validator::check([
+Validator::check([
     'email' => 'required|email',
     'vemail' => 'required|same:email',
     'phone' => 'phone',
     'country' => 'in_collection:countries',
-]);*/
+]);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
