@@ -22,6 +22,8 @@ Validator::check([
     'vemail' => 'required|same:email',
     'phone' => 'phone',
     'country' => 'in_collection:countries',
+], [
+        'countries' => $countries,
 ]);
 
 /*

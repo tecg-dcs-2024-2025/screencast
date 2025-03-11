@@ -78,9 +78,9 @@ class Validator
         return true;
     }
 
-    public static function check(array $rules)
+    public static function check(array $rules, array $collections): void
     {
-        self::parse_constraints($rules);
+        self::parse_constraints($rules,$collections);
 
         //Analyser les contraintes définies dans l’array
         //À partir de cette analyse appeler les méthodes de validation correspondantes
@@ -92,10 +92,34 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $rules, array $data): void
     {
+        foreach ($rules as $field_name => $rule){
+            $constraints = explode('|', $rule);
+            foreach ($constraints as $constraint){
+                if (str_contains($constraint, ':')){
+                    $constraint_params = explode(':', $constraint);
+                    $method = $constraint_params[0];
+                    $param = $constraint_params[1];
+                    if (isset($data[$param])) {
+                        $param = $data[$param];
+                    }
+                    if ($method === 'in_collection') {
+                        self::$method($field_name, $constraint_params[1], $param);
+                    } else
+                    if (method_exists(__CLASS__, $method)) {
+                        self::$method($field_name, $param);
+                    }
+                } else {
+                    if (method_exists(__CLASS__, $field_name)) {
+                        self::$constraint($field_name);
+
+                    }
+                }
+            }
+        }
+
         // Analyser les $rules
-        return false;
     }
 }
 
