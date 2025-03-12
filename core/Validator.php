@@ -2,6 +2,8 @@
 
 namespace Tecgdcs;
 
+use Tecgdcs\Exception\ValidationRuleNotFoundException;
+
 class Validator
 {
 
@@ -64,8 +66,9 @@ class Validator
     }
 
 
-    public static function in_collection(string $field_name, string $collection_name, array $collection): bool
+    public static function in_collection(string $field_name, string $collection_name): bool
     {
+        $collection = require __DIR__ . '/../config/' . $collection_name . '.php';
         if (array_key_exists($field_name, $_REQUEST) &&
             trim($_REQUEST[$field_name]) !== '' &&
             !array_key_exists($_REQUEST[$field_name], $collection)) {
@@ -78,42 +81,45 @@ class Validator
         return true;
     }
 
-    public static function check(array $rules): void
+    public static function check(array $constraints): void
     {
-
-        //Analyser les contraintes définies dans l’array
-        $constraints = self::parse_constraints($rules);
-
-        //À partir de cette analyse appeler les méthodes de validation correspondantes
-        foreach ($constraints as $field => $validators) {
-            foreach ($validators as $validator) {
-                if (method_exists(self::class, $validator)) {
-                    self::$validator($field);
-                }
-            }
+        try {
+            self::parse_constraints($constraints);
+        } catch (ValidationRuleNotFoundException $exception) {
+            die($exception->getMessage());
         }
 
+        //Analyser les contraintes définies dans l’array
+        //À partir de cette analyse appeler les méthodes de validation correspondantes
+
         if (isset($_SESSION['errors'])) {
-            $_SESSION['old'] = $_REQUEST;
-            header('Location: /index.php');
-            exit;
+            $_SESSION['old'] = $_SESSION;
+            header('location: /index.php');
+            exit();
         }
     }
 
-    private static function parse_constraints(array $rules): void
+    private static function parse_constraints(array $constraints): false
     {
+        $method = $param1 = $param2 = '';
+
         // Analyser les $rules
-        foreach ($rules as $field => $constraints) {
-            $validators = explode('|', $constraints);
+        foreach ($constraints as $field_name => $rules) {
+            $array_rules = explode('|', $rules);
 
-            foreach ($validators as $validator) {
-                $validator_name = explode(':', $validator);
-            }
+            foreach ($array_rules as $method) {
+                info($method);
+                if (str_contains($method, ':')) {
+                    list($method, $param1) = explode(':', $method);
+                }
 
-            if (method_exists(self::class, $validator_name)) {
-                self::$validator_name($field);
+                if (!method_exists(__CLASS__, $method)) {
+                    throw new ValidationRuleNotFoundException('La régle ' . $method . ' n\'existe pas.');
+                }
+                self::$method($field_name, $param1);
             }
         }
+        return false;
     }
 }
 

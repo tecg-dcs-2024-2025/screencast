@@ -1,29 +1,25 @@
 <?php
 
-namespace Tecgdcs\helpers;
-
-class Csrf
+function csrf()
 {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    echo <<<HTML
+<input type="hidden" name="_csrf" value="{$_SESSION['csrf_token']}">
+HTML;
+    echo PHP_EOL;
+}
 
-    public static function generateToken(): string
-    {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-
-        $token = bin2hex(random_bytes(16));
-        $_SESSION['token'] = $token;
-
-        return '<input type="hidden" name="csrf_token" value="' . ($token) . '">';
+function dd(mixed...$vars): void
+{
+    foreach ($vars as $var) {
+        var_dump($var);
     }
+    die();
+}
 
-    public static function checkToken(): void
-    {
-        if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            if (!isset($_POST['token'])) {
-                echo "Erreur : requête invalide";
-                exit;
-            }
-        }
-    }
+function info(string $message): void
+{
+    $path = __DIR__ . '/../../storage/logs/log.txt';
+
+    file_put_contents($path, $message . PHP_EOL, FILE_APPEND);
 }
