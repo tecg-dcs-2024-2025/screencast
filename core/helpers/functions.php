@@ -1,17 +1,22 @@
 <?php
-function generate_csrf()
+function csrf(): void
 {
-    $token = bin2hex(random_bytes(32));
-    $_SESSION['csrf_token'] = $token;
-    echo '<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'">';
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+    echo <<<HTML
+<input type="hidden" name="_csrf" value="{$_SESSION['token']}">
+HTML;
 }
 
-function validate_csrf()
+function dd(mixed ...$args): void // ... opérateur de déstructuration
 {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_REQUEST['csrf_token'] === $_SESSION['csrf_token']) {
-        return true;
-    } else {
-        echo 'Ce type de requête n’est pas valide !';
-        die();
+    foreach ($args as $arg) {
+        var_dump($arg);
     }
+    die();
+}
+
+function info(string $message): void
+{
+    $path = __DIR__.'/../../storage/logs/log.txt';
+    file_put_contents($path, $message.PHP_EOL, FILE_APPEND); // PHP_EOL end of line
 }

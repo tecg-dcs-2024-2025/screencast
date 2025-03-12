@@ -1,8 +1,8 @@
 <?php
 
 require './vendor/autoload.php';
-require './core/helpers/functions.php';
 
+use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
 session_start();
@@ -18,6 +18,11 @@ $messages = require './lang/fr/validation.php';
 $email = '';
 $vemail = '';
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $_REQUEST['_csrf'] !== $_SESSION['token']) {
+    Response::abort();
+}
+unset($_SESSION['token']);
+
 Validator::check([
     'email' => 'required|email',
     'vemail' => 'required|same:email',
@@ -25,13 +30,13 @@ Validator::check([
     'country' => 'in_collection:countries',
 ]);
 
-validate_csrf();
-
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
 */
-{
-
+if (isset($_SESSION['errors'])) {
+    $_SESSION['old'] = $_REQUEST;
+    header('Location: /index.php');
+    exit;
 }
 
 
