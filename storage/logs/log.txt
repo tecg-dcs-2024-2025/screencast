@@ -1,0 +1,6 @@
+required
+email
+required
+same:email
+phone
+in_collection:countries

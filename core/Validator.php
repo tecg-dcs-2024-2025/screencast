@@ -3,6 +3,9 @@
 namespace Tecgdcs;
 
 
+use Tecgdcs\Exceptions\ValidationRuleNotFoundException;
+require __DIR__.'/helpers/function.php';
+
 class Validator
 {
 
@@ -65,8 +68,9 @@ class Validator
     }
 
 
-    public static function in_collection(string $field_name, string $collection_name, array $collection): bool
+    public static function in_collection(string $field_name, string $collection_name): bool
     {
+        $collection = require __DIR__.'/../config/'.$collection_name.'.php';
         if (array_key_exists($field_name, $_REQUEST) &&
             trim($_REQUEST[$field_name]) !== '' &&
             !array_key_exists($_REQUEST[$field_name], $collection)) {
@@ -79,9 +83,13 @@ class Validator
         return true;
     }
 
-    public static function check(array $rules, array $countries)
+    public static function check(array $constraints)
     {
-        self::parse_constraints($rules,$countries);
+        try {
+            self::parse_constraints($constraints);
+        } catch (ValidationRuleNotFoundException $e) { // On a défini des exceptions
+            die($e->getMessage());
+        }
 
         //Analyser les contraintes définies dans l’array
         //À partir de cette analyse appeler les méthodes de validation correspondantes
@@ -93,29 +101,21 @@ class Validator
         }
     }
 
-    private static function parse_constraints(array $rules, array $countries): void
+    private static function parse_constraints(array $constraints): void
     {
-
-        foreach ($rules as $fieldName => $rule) { // Je boucle le tableau Validator::check qui est rules
-            $datas = explode('|', $rule); // ici, je sépare required et email, j'obtiens un nouveau tableau
-            foreach ($datas as $to_call) {
-                if (method_exists(__CLASS__, $to_call)) { //je vérifie qu'il y ait bien une méthode (__CLASS__ est une constante magique qui contient le nom de la classe actuelle)
-                    self::$to_call($fieldName);// self:: permet d'appeler des méthodes statiques dans la même classe.
-                } else if ($to_call === "same:email") { // je vérifie le cas de la vérification
-                    $data = explode(':', $to_call); // je sépare same:email
-                    foreach ($data as $call) {
-                        if (method_exists(__CLASS__, $call)) {
-                            self::$call($fieldName, 'email'); //On a besoin ici de deux valeurs
-                        }
-                    }
-                } else if ($to_call === "in_collection:countries") {  // je vérifie le cas du choix du pays
-                    $data = explode(':', $to_call);
-                    if (method_exists(__CLASS__, $data[0])) {
-                        self::in_collection($fieldName, 'email', $countries); // j'ai rajouté le tableau des pays dans Validator::check pour l'utiliser ici
-                    }
+        $param1 = '';
+        foreach ($constraints as $field_name => $rules) {
+            $array_rules = explode('|', $rules);
+            foreach ($array_rules as $rule) {
+            \info($rule);
+                if (str_contains($rule,':')){ // cherche une rule ou il y a => :
+                    [$rule, $param1] = explode(':', $rule); // explode same:email/in_collection:countries en lui ajoute un nouveau parametre param1
                 }
+                if (!method_exists(__CLASS__, $rule)){
+                    throw new ValidationRuleNotFoundException($rule.' n’existe pas');
+                }
+                self::$rule($field_name, $param1);
             }
-
         }
     }
 }
