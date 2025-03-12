@@ -1,8 +1,8 @@
 <?php
 
 require './vendor/autoload.php';
-require './core/helpers/function.php';
 
+use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
 session_start();
@@ -26,12 +26,12 @@ Validator::check([
 ]);
 
 // Vérification du $token de l'input par rapport au $token de la session
-$csrf_token = $_POST['csrf_token'] ?? null; // Ici, on attribue la valeur de l'input à une constante
-if ($_SESSION['token'] === $csrf_token) { // La condition ici est que session$token = input$token
-    echo 'La vérification est bonne';
-} else {
-    die();
-}
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' || $_SESSION['token'] !== $_POST['_csrf']) { // La condition ici est que session$token n’est pas = input$token
+    Response::abort();
+
+};
+unset($_SESSION['token']);
+
 
 
 /*

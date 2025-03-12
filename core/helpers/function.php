@@ -1,7 +1,9 @@
 <?php
-function csrf()
+function csrf(): void
 {
-    $token = bin2hex(random_bytes(32));
-    $_SESSION['token'] = $token;
-    echo '<input type="hidden" name="csrf_token" value="' . $token . '">';
+    $_SESSION['token'] = bin2hex(random_bytes(32));
+    echo <<<HTML
+<input type="hidden" name="_csrf" value="{$_SESSION['token']}">
+HTML;
+
 }
