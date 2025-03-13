@@ -2,9 +2,18 @@
 
 require './vendor/autoload.php';
 
+use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
+require './core/helpers/functions.php';
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    Response::abort();
+}
+
+check_csrf_token();
+
 $_SESSION['errors'] = null;
 $_SESSION['old'] = null;
 
@@ -28,7 +37,6 @@ Validator::check([
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
 */
 {
-
 }
 
 
