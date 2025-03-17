@@ -4,7 +4,8 @@ namespace Tecgdcs;
 
 use Tecgdcs\Exceptions\ValidationRuleNotFoundException;
 
-require __DIR__.'/helpers/functions.php';
+require __DIR__ . '/helpers/functions.php';
+require __DIR__ . '/Response.php';
 
 class Validator
 {
@@ -70,7 +71,7 @@ class Validator
 
     public static function in_collection(string $field_name, string $collection_name): bool
     {
-        $collection = require __DIR__.'/../config/'.$collection_name.'.php';
+        $collection = require __DIR__ . '/../config/' . $collection_name . '.php';
         if (array_key_exists($field_name, $_REQUEST) &&
             trim($_REQUEST[$field_name]) !== '' &&
             !array_key_exists($_REQUEST[$field_name], $collection)) {
@@ -96,8 +97,7 @@ class Validator
 
         if (isset($_SESSION['errors'])) {
             $_SESSION['old'] = $_REQUEST;
-            header('Location: /index.php');
-            exit;
+            Response::back();
         }
     }
 
