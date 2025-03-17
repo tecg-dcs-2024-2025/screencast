@@ -2,21 +2,13 @@
 
 namespace Tecgdcs;
 
+use JetBrains\PhpStorm\NoReturn;
+
 class Response
 {
-    public static function abort()
+    #[NoReturn]
+    public static function abort(): void
     {
-        die('Oups, un problème technique est survenu !');
-    }
-
-    public static function redirect($url)
-    {
-        header('Location:' . $url);
-        exit;
-    }
-
-    public static function back()
-    {
-        self::redirect($_SERVER['HTTP_REFERER']);
+        die('Un problème technique est survenu suite à votre requête');
     }
 }
