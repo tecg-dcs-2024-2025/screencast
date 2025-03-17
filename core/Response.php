@@ -13,14 +13,12 @@ class Response
     }
     public static function redirect(string $url)
     {
-                echo 'hey';
         header('Location: '.$url);
         exit;
     }
 
     public static function back()
     {
-        echo 'hallo';
         header('Location: '.$_SERVER['HTTP_REFERER']);
         exit;
     }
