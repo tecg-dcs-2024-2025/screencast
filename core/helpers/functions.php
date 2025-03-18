@@ -45,3 +45,8 @@ if (!function_exists('dd')) {
         die();
     }
 }
+
+function back($url)
+{
+    Response::back();
+}

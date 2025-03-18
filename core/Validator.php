@@ -96,6 +96,8 @@ class Validator
 
         if (isset($_SESSION['errors'])) {
             $_SESSION['old'] = $_REQUEST;
+            Response::redirect('url');
+            Response::back();
             header('Location: /index.php');
             exit;
         }
