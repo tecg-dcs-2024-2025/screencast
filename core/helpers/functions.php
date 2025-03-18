@@ -45,3 +45,17 @@ if (!function_exists('dd')) {
         die();
     }
 }
+
+if (!function_exists('redirect')){
+    function redirect($url)
+    {
+        Response::redirect($url);
+    }
+}
+
+if (!function_exists('back')){
+    function back()
+    {
+        Response::back();
+    }
+}
