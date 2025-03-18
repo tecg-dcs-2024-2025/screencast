@@ -1,5 +1,7 @@
 <?php
 
+use Tecgdcs\Response;
+
 function csrf()
 {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -22,4 +24,12 @@ function info(string $message): void
     $path = __DIR__ . '/../../storage/logs/log.txt';
 
     file_put_contents($path, $message . PHP_EOL, FILE_APPEND);
+}
+
+function back() {
+    Response::back();
+}
+
+function redirect(string $url) {
+    Response::redirect($url);
 }
