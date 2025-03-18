@@ -1,6 +1,8 @@
 <?php
 
-namespace Tecgdcs\Animal;
+namespace Tecgdcs;
+
+use Tecgdcs\Exception\ValidationRulesNotFoundException;
 
 class Validator
 {
@@ -93,18 +95,22 @@ class Validator
         return true;
     }
 
-    private static function parse_constraints(array $rules): false
+    private static function parse_constraints(array $constraints): void
     {
-        // Analyser les $rules
-        foreach ($rules as $fieldName => $rule) {
-            $datas = explode('|', $rule);
-            foreach ($datas as $data) {
-                if (method_exists(__CLASS__, $data)) {
-                    self::$data($rule);
-                }
-            }
+        $method = $param1 = $param2 = '';
+        foreach ($constraints as $field_name => $rules) {
+            $array_rules = explode('|', $rules);
         }
-        return false;
+        foreach ($array_rules as $method) {
+            info($method);
+            if (str_contains($method, ':')) {
+                [$method, $param1] = explode(':', $method);
+            }
+            if (!method_exists(__CLASS__, $method)) {
+                throw new ValidationRulesNotFoundException('La règle'.$method.' n’existe pas');
+            }
+            self::$method($field_name, $param1);
+        }
     }
 }
 

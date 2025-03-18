@@ -42,7 +42,7 @@ require './core/helpers/functions.php';
             <h1>Déclaration de perte d'animal</h1>
             <form action="/process.php"
                   method="post">
-                <?php echo csrf();?>
+                <?php csrf();?>
                 <fieldset>
                     <legend>Vos coordonnées</legend>
                     <div class="fields">

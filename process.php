@@ -2,7 +2,16 @@
 
 require './vendor/autoload.php';
 
-use Tecgdcs\Animal\Validator;
+use Tecgdcs\Validator;
+use Tecgdcs\Response;
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    Response::abort();
+}
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+    Response::abort();
+}
+unset($_SESSION['csrf_token']);
 
 session_start();
 $csrf_token = require './core/helpers/functions.php';
@@ -19,6 +28,8 @@ $messages = require './lang/fr/validation.php';
 $email = '';
 $vemail = '';
 
+var_dump($_SERVER); die();
+
 Validator::check([
     'email' => 'required|email',
     'vemail' => 'required|same:email',
@@ -26,11 +37,13 @@ Validator::check([
     'country' => 'in_collection:countries',
 ]);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        die('Vérification du Token invalide');
-    }
-}
+/*Validator::required('email');
+Validator::required('vemail');
+Validator::email('email');
+Validator::same('vemail', 'email');
+Validator::phone('phone');
+Validator::in_collection('country','countries', $countries);*/
+
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
 */
