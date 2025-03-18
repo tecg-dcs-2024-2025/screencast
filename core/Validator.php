@@ -5,6 +5,7 @@ namespace Tecgdcs;
 use Tecgdcs\Exceptions\ValidationRuleNotFoundException;
 
 require __DIR__.'/helpers/functions.php';
+require_once __DIR__.'/Response.php';
 
 class Validator
 {
@@ -96,8 +97,7 @@ class Validator
 
         if (isset($_SESSION['errors'])) {
             $_SESSION['old'] = $_REQUEST;
-            header('Location: /index.php');
-            exit;
+            Response::back();
         }
     }
 
