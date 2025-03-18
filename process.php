@@ -6,6 +6,7 @@ use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
 require './core/helpers/functions.php';
+require './core/Response.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -38,7 +39,15 @@ Validator::check([
 */
 {
 }
+if (!function_exists('redirect'))
+{
+    Response::redirect($url);
+}
 
+if (!function_exists('back'))
+{
+    Response::back();
+}
 
 /*
  * Assurer le rendu récapitulatif des données soumises
