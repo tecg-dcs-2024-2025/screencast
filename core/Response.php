@@ -11,4 +11,15 @@ class Response
     {
         die('Un problème technique est survenu suite à votre requête');
     }
+
+    public static function redirect(): void
+    {
+
+    }
+
+    function back(): void
+    {
+        $referer = $_SERVER['HTTP_REFERER'] ?? '/header.php';
+        self::redirect($referer);
+    }
 }
