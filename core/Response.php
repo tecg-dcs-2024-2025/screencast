@@ -21,6 +21,5 @@ class Response
     public static function back(): void
     {
         self::redirect($_SERVER['HTTP_REFERER']);
-        exit;
     }
 }
