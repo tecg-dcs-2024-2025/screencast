@@ -5,7 +5,8 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Tecgdcs\\": "core/"
+      "Tecgdcs\\": "core/",
+      "Animal\\": "app/"
     }
   },
   "authors": [
@@ -15,6 +16,7 @@
     }
   ],
   "require": {
+    "php": "8.3",
     "laravel/pint": "^1.21"
   }
 }
