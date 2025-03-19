@@ -36,9 +36,6 @@ Validator::check([
 /*
 * S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
 */
-{
-}
-
 
 /*
  * Assurer le rendu récapitulatif des données soumises

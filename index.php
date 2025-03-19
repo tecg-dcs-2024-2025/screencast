@@ -2,8 +2,6 @@
 
 session_start();
 
-
-
 $countries = require './config/countries.php';
 $pet_types = require './config/pet_types.php';
 require './core/helpers/functions.php';
@@ -56,16 +54,16 @@ require './core/helpers/functions.php';
                                    id="email"
                                    placeholder="jean@valjean.net"
                                 <?php
-                                if (isset($_SESSION['old']['email'])): ?>
+                                if (isset($_SESSION['old']['email'])) { ?>
                                     value="<?= $_SESSION['old']['email'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                                    required>
                             <?php
-                            if (isset($_SESSION['errors']['email'])): ?>
+                            if (isset($_SESSION['errors']['email'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['email'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Email verification -->
@@ -75,16 +73,16 @@ require './core/helpers/functions.php';
                                    name="vemail"
                                    id="vemail"
                                 <?php
-                                if (isset($_SESSION['old']['vemail'])): ?>
+                                if (isset($_SESSION['old']['vemail'])) { ?>
                                     value="<?= $_SESSION['old']['vemail'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                                    required>
                             <?php
-                            if (isset($_SESSION['errors']['vemail'])): ?>
+                            if (isset($_SESSION['errors']['vemail'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['vemail'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
 
                         </div>
                         <!-- Phone number -->
@@ -95,16 +93,16 @@ require './core/helpers/functions.php';
                                    id="phone"
                                    placeholder="+32 (0)4 279 75 01"
                                 <?php
-                                if (isset($_SESSION['old']['phone'])): ?>
+                                if (isset($_SESSION['old']['phone'])) { ?>
                                     value="<?= $_SESSION['old']['phone'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                             >
                             <?php
-                            if (isset($_SESSION['errors']['phone'])): ?>
+                            if (isset($_SESSION['errors']['phone'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['phone'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
 
                         </div>
                         <!-- Country -->
@@ -113,22 +111,22 @@ require './core/helpers/functions.php';
                             <select name="country"
                                     id="country">
                                 <?php
-                                foreach ($countries as $code => $name): ?>
+                                foreach ($countries as $code => $name) { ?>
                                     <option value="<?= $code ?>"
                                         <?php
-                                        if (isset($_SESSION['old']['country']) && $code === $_SESSION['old']['country']): ?>
+                                        if (isset($_SESSION['old']['country']) && $code === $_SESSION['old']['country']) { ?>
                                             selected
                                         <?php
-                                        endif; ?>
+                                        } ?>
                                     ><?= $name ?></option>
                                 <?php
-                                endforeach; ?>
+                                } ?>
                             </select>
                             <?php
-                            if (isset($_SESSION['errors']['country'])): ?>
+                            if (isset($_SESSION['errors']['country'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['country'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
                     </div>
                 </fieldset>
@@ -143,22 +141,22 @@ require './core/helpers/functions.php';
                             <select name="pet-type"
                                     id="pet-type">
                                 <?php
-                                foreach ($pet_types as $type => $pet_type): ?>
+                                foreach ($pet_types as $type => $pet_type) { ?>
                                     <option value="<?= $type ?>"
                                         <?php
-                                        if (isset($_SESSION['old']['pet-type']) && $type === $_SESSION['old']['pet-type']): ?>
+                                        if (isset($_SESSION['old']['pet-type']) && $type === $_SESSION['old']['pet-type']) { ?>
                                             selected
                                         <?php
-                                        endif; ?>
+                                        } ?>
                                     ><?= $pet_type ?></option>
                                 <?php
-                                endforeach; ?>
+                                } ?>
                             </select>
                             <?php
-                            if (isset($_SESSION['errors']['pet-type'])): ?>
+                            if (isset($_SESSION['errors']['pet-type'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-type'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Pet Name -->
@@ -169,16 +167,16 @@ require './core/helpers/functions.php';
                                    id="pet-name"
                                    placeholder="Rex"
                                 <?php
-                                if (isset($_SESSION['old']['pet-name'])): ?>
+                                if (isset($_SESSION['old']['pet-name'])) { ?>
                                     value="<?= $_SESSION['old']['pet-name'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                                    required>
                             <?php
-                            if (isset($_SESSION['errors']['pet-name'])): ?>
+                            if (isset($_SESSION['errors']['pet-name'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-name'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Pet chip -->
@@ -190,15 +188,15 @@ require './core/helpers/functions.php';
                                    name="pet-chip"
                                    id="pet-chip"
                                 <?php
-                                if (isset($_SESSION['old']['pet-chip'])): ?>
+                                if (isset($_SESSION['old']['pet-chip'])) { ?>
                                     value="<?= $_SESSION['old']['pet-chip'] ?>"
                                 <?php
-                                endif; ?>>
+                                } ?>>
                             <?php
-                            if (isset($_SESSION['errors']['pet-chip'])): ?>
+                            if (isset($_SESSION['errors']['pet-chip'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-chip'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Pet Gender -->
@@ -209,31 +207,31 @@ require './core/helpers/functions.php';
                                    id="pet-gender-female"
                                    value="female"
                                 <?php
-                                if (isset($_SESSION['old']['pet-gender']) && $_SESSION['old']['pet-gender'] === 'female'): ?>
+                                if (isset($_SESSION['old']['pet-gender']) && $_SESSION['old']['pet-gender'] === 'female') { ?>
                                     checked
                                 <?php
-                                endif; ?>
+                                } ?>
                             ><label for="pet-gender-female">Femelle</label>
                             <?php
-                            if (isset($_SESSION['errors']['pet-gender'])): ?>
+                            if (isset($_SESSION['errors']['pet-gender'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-gender'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                             <input type="radio"
                                    name="pet-gender"
                                    id="pet-gender-male"
                                    value="male"
                                 <?php
-                                if (isset($_SESSION['old']['pet-gender']) && $_SESSION['old']['pet-gender'] === 'male'): ?>
+                                if (isset($_SESSION['old']['pet-gender']) && $_SESSION['old']['pet-gender'] === 'male') { ?>
                                     checked
                                 <?php
-                                endif; ?>
+                                } ?>
                             ><label for="pet-gender-male">Male</label>
                             <?php
-                            if (isset($_SESSION['errors']['pet-gender'])): ?>
+                            if (isset($_SESSION['errors']['pet-gender'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-gender'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
 
                         </div>
                         <!-- Pet Age -->
@@ -245,15 +243,15 @@ require './core/helpers/functions.php';
                                    id="pet-age"
                                    placeholder="5"
                                 <?php
-                                if (isset($_SESSION['old']['pet-age'])): ?>
+                                if (isset($_SESSION['old']['pet-age'])) { ?>
                                     value="<?= $_SESSION['old']['pet-age'] ?>"
                                 <?php
-                                endif; ?>>
+                                } ?>>
                             <?php
-                            if (isset($_SESSION['errors']['pet-age'])): ?>
+                            if (isset($_SESSION['errors']['pet-age'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-age'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Pet Race -->
@@ -264,15 +262,15 @@ require './core/helpers/functions.php';
                                    id="pet-race"
                                    placeholder="Caniche"
                                 <?php
-                                if (isset($_SESSION['old']['pet-race'])): ?>
+                                if (isset($_SESSION['old']['pet-race'])) { ?>
                                     value="<?= $_SESSION['old']['pet-race'] ?>"
                                 <?php
-                                endif; ?>>
+                                } ?>>
                             <?php
-                            if (isset($_SESSION['errors']['pet-race'])): ?>
+                            if (isset($_SESSION['errors']['pet-race'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-race'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Pet tatoo -->
@@ -298,13 +296,13 @@ require './core/helpers/functions.php';
                                       id="pet-description"
                                       rows="10"
                                       placeholder="C’est un bon gamin"><?php
-                                if (isset($_SESSION['old']['pet-description'])): ?><?= $_SESSION['old']['pet-description'] ?><?php
-                                endif; ?></textarea>
+                                if (isset($_SESSION['old']['pet-description'])) { ?><?= $_SESSION['old']['pet-description'] ?><?php
+                                } ?></textarea>
                             <?php
-                            if (isset($_SESSION['errors']['pet-description'])): ?>
+                            if (isset($_SESSION['errors']['pet-description'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['pet-description'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                         <!-- Pet Race -->
@@ -314,18 +312,18 @@ require './core/helpers/functions.php';
                                    name="pet-picture"
                                    id="pet-picture">
                             <?php
-                            if (isset($_SESSION['errors']['pet-picture'])): ?>
+                            if (isset($_SESSION['errors']['pet-picture'])) { ?>
                                 <div class="error">
                                     <p><?= $_SESSION['errors']['pet-picture'] ?></p>
                                 </div>
                             <?php
-                            elseif (!empty($_SESSION['errors'])): ?>
+                            } elseif (! empty($_SESSION['errors'])) { ?>
                                 <div class="error">
                                     <p>Il faut resélectionner l’image que vous aviez choisie, sinon, elle sera
                                        perdue.</p>
                                 </div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
                 </fieldset>
@@ -342,16 +340,16 @@ require './core/helpers/functions.php';
                                    name="disparition-date"
                                    id="disparition-date"
                                 <?php
-                                if (isset($_SESSION['old']['disparition-date'])): ?>
+                                if (isset($_SESSION['old']['disparition-date'])) { ?>
                                     value="<?= $_SESSION['old']['disparition-date'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                                    required>
                             <?php
-                            if (isset($_SESSION['errors']['disparition-date'])): ?>
+                            if (isset($_SESSION['errors']['disparition-date'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['disparition-date'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
 
 
@@ -363,16 +361,16 @@ require './core/helpers/functions.php';
                                    name="disparition-time"
                                    id="disparition-time"
                                 <?php
-                                if (isset($_SESSION['old']['disparition-time'])): ?>
+                                if (isset($_SESSION['old']['disparition-time'])) { ?>
                                     value="<?= $_SESSION['old']['disparition-time'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                             >
                             <?php
-                            if (isset($_SESSION['errors']['disparition-time'])): ?>
+                            if (isset($_SESSION['errors']['disparition-time'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['disparition-time'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
 
                         </div>
                         <!-- Disparition postal code -->
@@ -383,16 +381,16 @@ require './core/helpers/functions.php';
                                    id="disparition-postal-code"
                                    placeholder="4000"
                                 <?php
-                                if (isset($_SESSION['old']['disparition-postal-code'])): ?>
+                                if (isset($_SESSION['old']['disparition-postal-code'])) { ?>
                                     value="<?= $_SESSION['old']['disparition-postal-code'] ?>"
                                 <?php
-                                endif; ?>
+                                } ?>
                                    required>
                             <?php
-                            if (isset($_SESSION['errors']['disparition-postal-code'])): ?>
+                            if (isset($_SESSION['errors']['disparition-postal-code'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['disparition-postal-code'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
 
                         </div>
 
@@ -402,22 +400,22 @@ require './core/helpers/functions.php';
                             <select name="disparition-country"
                                     id="disparition-country">
                                 <?php
-                                foreach ($countries as $code => $name): ?>
+                                foreach ($countries as $code => $name) { ?>
                                     <option value="<?= $code ?>"
                                         <?php
-                                        if (isset($_SESSION['old']['disparition-country']) && $code === $_SESSION['old']['disparition-country']): ?>
+                                        if (isset($_SESSION['old']['disparition-country']) && $code === $_SESSION['old']['disparition-country']) { ?>
                                             selected
                                         <?php
-                                        endif; ?>
+                                        } ?>
                                     ><?= $name ?></option>
                                 <?php
-                                endforeach; ?>
+                                } ?>
                             </select>
                             <?php
-                            if (isset($_SESSION['errors']['disparition-country'])): ?>
+                            if (isset($_SESSION['errors']['disparition-country'])) { ?>
                                 <div class="error"><p><?= $_SESSION['errors']['disparition-country'] ?></p></div>
                             <?php
-                            endif; ?>
+                            } ?>
                         </div>
                     </div>
                 </fieldset>
