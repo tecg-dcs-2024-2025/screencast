@@ -11,4 +11,18 @@ class Response
     {
         die('Un problème technique est survenu suite à votre requête');
     }
+
+    #[NoReturn]
+    public static function redirect(string $url): void
+    {
+        header("Location: $url");
+        exit;
+    }
+
+    #[NoReturn]
+    public static function back(): void
+    {
+        $previousUrl = $_SERVER['HTTP_REFERER'] ?? '/';
+        self::redirect($previousUrl);
+    }
 }

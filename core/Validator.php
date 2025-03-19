@@ -96,8 +96,8 @@ class Validator
 
         if (isset($_SESSION['errors'])) {
             $_SESSION['old'] = $_REQUEST;
-            header('Location: /index.php');
-            exit;
+            // J'ai choisi d'utiliser la méthode back() avec le HTTP REFERER mais la méthode redirect est également disponible et prend en paramètre l'url de la page vers laquelle on est redirigé.
+            back();
         }
     }
 
