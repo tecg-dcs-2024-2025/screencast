@@ -1,47 +1,3 @@
-<?php
-
-require './vendor/autoload.php';
-
-use Tecgdcs\Response;
-use Tecgdcs\Validator;
-
-require './core/helpers/functions.php';
-session_start();
-
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    Response::abort();
-}
-
-check_csrf_token();
-
-$_SESSION['errors'] = null;
-$_SESSION['old'] = null;
-
-$countries = require './config/countries.php';
-$messages = require './lang/fr/validation.php';
-
-/*
- * Valider les deux champs
- */
-$email = '';
-$vemail = '';
-
-Validator::check([
-    'email' => 'required|email',
-    'vemail' => 'required|same:email',
-    'phone' => 'phone',
-    'country' => 'in_collection:countries',
-]);
-
-/*
-* S’il y a des erreurs, on redirige vers la page du formulaire, en mémorisant le temps d'une requête les erreurs et les anciennes données
-*/
-
-/*
- * Assurer le rendu récapitulatif des données soumises
- */
-
-?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -71,7 +27,7 @@ Validator::check([
         <link rel="manifest"
               href="/site.webmanifest">
         <link rel="stylesheet"
-              href="/css/main.css">
+              href="/public/css/main.css">
     </head>
     <body>
         <h1>Récapitulatif des données soumises</h1>
