@@ -6,10 +6,16 @@ use JetBrains\PhpStorm\NoReturn;
 
 class Response
 {
+    const int SEE_OTHER = 303;
+    const int BAD_REQUEST = 400;
+    const int UNAUTHORIZED = 401;
+    const int NOT_FOUND = 404;
+    const int SERVER_ERROR = 500;
     #[NoReturn]
-    public static function abort(): void
+    public static function abort($code = self::NOT_FOUND): void
     {
-        exit('Un problème technique est survenu suite à votre requête');
+        require VIEW_DIR.'/redirectioncode/'.$code.'.view.php';
+        die();
     }
 
     #[NoReturn]
