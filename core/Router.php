@@ -2,6 +2,8 @@
 
 namespace Tecgdcs;
 
+use Tecgdcs\Response;
+
 class Router
 {
     private array $routes;
@@ -33,8 +35,7 @@ class Router
                 && strtoupper($this->uri) === strtoupper($route['uri'])
         );
         if (empty($routes_f)) {
-            http_response_code(404);
-            exit();
+            Response::abort(Response::BAD_REQUEST);
         }
 
         return array_values($routes_f)[0]['action'];
