@@ -2,27 +2,32 @@
 
 namespace Tecgdcs;
 
-use JetBrains\PhpStorm\NoReturn;
 
 class Response
 {
-    #[NoReturn]
-    public static function abort(): void
+    const SEE_OTHER = 303;
+    const BAD_REQUEST = 400;
+    const UNAUTHORIZED = 401;
+    const NOT_FOUND = 404;
+    const SERVER_ERROR = 500;
+
+    public static function abort($code = self::NOT_FOUND)
     {
-        exit('Un problème technique est survenu suite à votre requête');
+        http_response_code($code);
+        require CODES.$code.'view.php';
     }
 
-    #[NoReturn]
     public static function redirect(string $url): void
     {
         header("Location: $url");
+        self::abort(self::SERVER_ERROR);
         exit;
     }
 
-    #[NoReturn]
     public static function back(): void
     {
         $previousUrl = $_SERVER['HTTP_REFERER'] ?? '/';
+        self::abort(self::SERVER_ERROR);
         self::redirect($previousUrl);
     }
 }
