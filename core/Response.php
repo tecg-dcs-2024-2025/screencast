@@ -6,20 +6,29 @@ use JetBrains\PhpStorm\NoReturn;
 
 class Response
 {
+    const int  SEE_OTHER = 303;
+    const int  BAD_REQUEST = 400;
+    const int  UNAUTHORIZED = 401;
+    const int NOT_FOUND = 404;
+    const int  SERVER_ERROR = 500;
+
     #[NoReturn]
     public static function abort(): void
     {
-        die('Un problème technique est survenu suite à votre requête');
-    }
-
-    public static function redirect(): void
-    {
 
     }
 
-    function back(): void
+    #[NoReturn]
+    public static function redirect(string $url): void
     {
-        $referer = $_SERVER['HTTP_REFERER'] ?? '/header.php';
-        self::redirect($referer);
+        header("Location: $url");
+        exit;
+    }
+
+    #[NoReturn]
+    public static function back(): void
+    {
+        $previousUrl = $_SERVER['HTTP_REFERER'] ?? '/';
+        self::redirect($previousUrl);
     }
 }
