@@ -10,5 +10,6 @@ define('MESSAGES', require LANG_DIR.'/fr/validation.php');
 
 session_start();
 
-$router = new \Tecgdcs\Router;
+$router = new Tecgdcs\Router;
 $router->route();
+//\Tecgdcs\Response::abort(); Test
