@@ -11,6 +11,7 @@ class Response
     const int SEE_OTHER = 303;
     const int SERVER_ERROR = 500;
     const int UNAUTHORIZED = 401;
+    
     #[NoReturn]
     public static function abort($code = self::NOT_FOUND): void
     {

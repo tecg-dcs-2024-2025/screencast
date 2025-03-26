@@ -15,5 +15,8 @@
       "email": "dominique.vilain@hepl.be"
     }
   ],
-  "require": {}
+  "require": {
+    "php": "^8.3",
+    "laravel/pint": "^1.21"
+  }
 }
