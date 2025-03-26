@@ -1,5 +1,5 @@
 <?php
-
+/*test*/
 namespace Tecgdcs;
 
 class Router
@@ -33,8 +33,7 @@ class Router
                 && strtoupper($this->uri) === strtoupper($route['uri'])
         );
         if (empty($routes_f)) {
-            http_response_code(404);
-            exit();
+            Response::abort(); /* j'ai renplecer le message en dure par un message automatique*/
         }
 
         return array_values($routes_f)[0]['action'];
