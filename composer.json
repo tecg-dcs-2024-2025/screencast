@@ -6,7 +6,8 @@
   "autoload": {
     "psr-4": {
       "Tecgdcs\\": "core/",
-      "Animal\\": "app/"
+      "Animal\\": "app/",
+      "Animal\\Models\\": "app/models"
     }
   },
   "authors": [
@@ -17,6 +18,8 @@
   ],
   "require": {
     "php": "^8.3",
-    "laravel/pint": "^1.21"
+    "laravel/pint": "^1.21",
+    "illuminate/database": "^12.3",
+    "illuminate/events": "^12.3"
   }
 }
