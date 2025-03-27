@@ -2,25 +2,17 @@
 
 namespace Animal\Controllers;
 
+use Animal\Models\Country;
+use Animal\Models\PetType;
 use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
 class LossDeclarationController
 {
-    private array $countries;
-
-    private array $pet_types;
-
-    public function __construct()
-    {
-        $this->countries = require CONFIG_DIR.'/countries.php';
-        $this->pet_types = require CONFIG_DIR.'/pet_types.php';
-    }
-
     public function create()
     {
-        $countries = $this->countries;
-        $pet_types = $this->pet_types;
+        $countries = Country::all();
+        $pet_types = PetType::all();
 
         require VIEW_DIR.'/lossdeclaration/create.php';
     }

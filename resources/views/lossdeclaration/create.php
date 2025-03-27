@@ -104,14 +104,14 @@
                         <select name="country"
                                 id="country">
                             <?php
-                            foreach ($countries as $code => $name) { ?>
-                                <option value="<?= $code ?>"
+                            foreach ($countries as $country) { ?>
+                                <option value="<?= $country->code ?>"
                                     <?php
-                                    if (isset($_SESSION['old']['country']) && $code === $_SESSION['old']['country']) { ?>
+                                    if (isset($_SESSION['old']['country']) && $country->code === $_SESSION['old']['country']) { ?>
                                         selected
                                         <?php
                                     } ?>
-                                ><?= $name ?></option>
+                                ><?= COUNTRIES[$country->code] ?></option>
                                 <?php
                             } ?>
                         </select>
@@ -134,14 +134,14 @@
                         <select name="pet-type"
                                 id="pet-type">
                             <?php
-                            foreach ($pet_types as $type => $pet_type) { ?>
-                                <option value="<?= $type ?>"
+                            foreach ($pet_types as $type) { ?>
+                                <option value="<?= $type->code ?>"
                                     <?php
-                                    if (isset($_SESSION['old']['pet-type']) && $type === $_SESSION['old']['pet-type']) { ?>
+                                    if (isset($_SESSION['old']['pet-type']) && $type->code === $_SESSION['old']['pet-type']) { ?>
                                         selected
                                         <?php
                                     } ?>
-                                ><?= $pet_type ?></option>
+                                ><?= PET_TYPES[$type->code] ?></option>
                                 <?php
                             } ?>
                         </select>
@@ -310,7 +310,7 @@
                                 <p><?= $_SESSION['errors']['pet-picture'] ?></p>
                             </div>
                             <?php
-                        } elseif (! empty($_SESSION['errors'])) { ?>
+                        } elseif (!empty($_SESSION['errors'])) { ?>
                             <div class="error">
                                 <p>Il faut resélectionner l’image que vous aviez choisie, sinon, elle sera
                                    perdue.</p>
@@ -393,14 +393,14 @@
                         <select name="disparition-country"
                                 id="disparition-country">
                             <?php
-                            foreach ($countries as $code => $name) { ?>
-                                <option value="<?= $code ?>"
+                            foreach ($countries as $country) { ?>
+                                <option value="<?= $country->code ?>"
                                     <?php
-                                    if (isset($_SESSION['old']['disparition-country']) && $code === $_SESSION['old']['disparition-country']) { ?>
+                                    if (isset($_SESSION['old']['disparition-country']) && $country->code === $_SESSION['old']['disparition-country']) { ?>
                                         selected
                                         <?php
                                     } ?>
-                                ><?= $name ?></option>
+                                ><?= COUNTRIES[$country->code] ?></option>
                                 <?php
                             } ?>
                         </select>
@@ -418,4 +418,4 @@
 </html>
 <?php
 $_SESSION['errors'] = null;
-            $_SESSION['old'] = null;
+$_SESSION['old'] = null;
