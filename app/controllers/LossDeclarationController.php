@@ -3,7 +3,9 @@
 namespace Animal\Controllers;
 
 use Animal\Models\Country;
+use Animal\Models\PetOwner;
 use Animal\Models\PetType;
+use JetBrains\PhpStorm\NoReturn;
 use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
@@ -17,7 +19,8 @@ class LossDeclarationController
         require VIEW_DIR.'/lossdeclaration/create.php';
     }
 
-    public function store()
+    #[NoReturn]
+    public function store(): void
     {
         check_csrf_token();
 
@@ -30,6 +33,16 @@ class LossDeclarationController
             'phone' => 'phone',
             'country' => 'in_collection:countries',
         ]);
+
+        PetOwner::upsert([
+            [
+                'email' => $_REQUEST['email'],
+                'phone' => $_REQUEST['phone']
+            ],
+        ],
+            uniqueBy: ['email'],
+            update: ['phone']
+        );
 
         //Écrire dans la base de données
 
