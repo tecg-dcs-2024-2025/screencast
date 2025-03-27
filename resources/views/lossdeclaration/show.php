@@ -34,7 +34,7 @@
         <dl>
             <div>
                 <dt>Email&nbsp;:</dt>
-                <dd><?= $email ?></dd>
+                <dd><?= $pet_owner->email ?></dd>
             </div>
         </dl>
     </body>
