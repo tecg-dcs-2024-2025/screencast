@@ -1,59 +1,67 @@
 <?php
 
-namespace Animal\Controllers;
+namespace Animal\controllers;
 
+use Animal\Models\Country;
+use Animal\Models\PetOwner;
+use Animal\Models\PetType;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Tecgdcs\Response;
 use Tecgdcs\Validator;
 
 class LossDeclarationController
 {
-    private array $countries;
-
-    private array $pet_types;
-
-    public function __construct()
-    {
-        $this->countries = require CONFIG_DIR.'/countries.php';
-        $this->pet_types = require CONFIG_DIR.'/pet_types.php';
-    }
-
     public function create()
     {
-        $countries = $this->countries;
-        $pet_types = $this->pet_types;
+        $countries = Country::all();
+        $pet_types = PetType::all();
 
         require VIEW_DIR.'/lossdeclaration/create.php';
     }
 
-    public function store()
+    public function store(): void
     {
         check_csrf_token();
 
         $_SESSION['errors'] = null;
         $_SESSION['old'] = null;
 
-        $data = Validator::check([
+        Validator::check([
             'email' => 'required|email',
             'vemail' => 'required|same:email',
             'phone' => 'phone',
             'country' => 'in_collection:countries',
         ]);
 
-        $owner = new Owner();
-        $owner->name = $data['name'];
-        $owner->email = $data['email'];
-        $owner->save();
+        PetOwner::upsert([
+            [
+                'email' => $_REQUEST['email'],
+                'phone' => $_REQUEST['phone']
+            ],
+        ],
+            uniqueBy: ['email'],
+            update: ['phone']
+        );
 
-        //Écrire dans la base de données
+        $pet_owner = PetOwner::latest('updated_at')->first();
 
-        Response::redirect('/loss-declaration');
+        Response::redirect('/loss-declaration?id='.$pet_owner->id);
     }
 
     public function show()
     {
-        // Analyser la query string pour savoir quelle déclaration afficher
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+            Response::abort(Response::BAD_REQUEST);
+        }
 
-        $email = 'toto';
+        $id = (int) trim($_GET['id']);
+
+        try {
+            $pet_owner = PetOwner::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            Response::abort();
+        }
+        // Analyser la query string pour savoir quelle déclaration afficher
         require VIEW_DIR.'/lossdeclaration/show.php';
     }
 }
