@@ -30,6 +30,6 @@
           href="/public/css/main.css">
 </head>
 <body>
-<h1>Erreur 401 : l'autorisation de l'identifiant à échouée</h1>
+<h1>L'autorisation de l'identifiant à échouée, vous ne pouvez pas accéder à cette ressource</h1>
 </body>
 </html>

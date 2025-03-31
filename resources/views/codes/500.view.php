@@ -30,6 +30,6 @@
           href="/public/css/main.css">
 </head>
 <body>
-<h1>Erreur 500 : il y a un problème avec le serveur</h1>
+<h1>Il y a un problème avec le serveur</h1>
 </body>
 </html>

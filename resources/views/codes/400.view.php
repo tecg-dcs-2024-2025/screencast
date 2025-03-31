@@ -30,6 +30,6 @@
           href="/public/css/main.css">
 </head>
 <body>
-<h1>Erreur 400 : votre requête à échouée</h1>
+<h1>Votre requête à échouée</h1>
 </body>
 </html>

@@ -32,12 +32,17 @@ class LossDeclarationController
         $_SESSION['errors'] = null;
         $_SESSION['old'] = null;
 
-        Validator::check([
+        $data = Validator::check([
             'email' => 'required|email',
             'vemail' => 'required|same:email',
             'phone' => 'phone',
             'country' => 'in_collection:countries',
         ]);
+
+        $owner = new Owner();
+        $owner->name = $data['name'];
+        $owner->email = $data['email'];
+        $owner->save();
 
         //Écrire dans la base de données
 
