@@ -19,7 +19,7 @@
     font-style: normal;
     font-weight: 100 900;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/InterVariable.woff2") format("woff2");
+    src: url("/css/fonts/InterVariable.woff2") format("woff2");
 }
 
 @font-face {
@@ -27,7 +27,7 @@
     font-style: italic;
     font-weight: 100 900;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/InterVariable-Italic.woff2") format("woff2");
+    src: url("/css/fonts/InterVariable-Italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -35,7 +35,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/Inter-Regular.woff2") format("woff2");
+    src: url("/css/fonts/Inter-Regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -43,7 +43,7 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/Inter-Italic.woff2") format("woff2");
+    src: url("/css/fonts/Inter-Italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -51,7 +51,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/Inter-Bold.woff2") format("woff2");
+    src: url("/css/fonts/Inter-Bold.woff2") format("woff2");
 }
 
 @font-face {
@@ -59,7 +59,7 @@
     font-style: italic;
     font-weight: 700;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/Inter-BoldItalic.woff2") format("woff2");
+    src: url("/css/fonts/Inter-BoldItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -67,7 +67,7 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/InterDisplay-Regular.woff2") format("woff2");
+    src: url("/css/fonts/InterDisplay-Regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -75,7 +75,7 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/InterDisplay-Italic.woff2") format("woff2");
+    src: url("/css/fonts/InterDisplay-Italic.woff2") format("woff2");
 }
 
 @font-face {
@@ -83,7 +83,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/InterDisplay-Bold.woff2") format("woff2");
+    src: url("/css/fonts/InterDisplay-Bold.woff2") format("woff2");
 }
 
 @font-face {
@@ -91,7 +91,7 @@
     font-style: italic;
     font-weight: 700;
     font-display: swap;
-    src: url("/public/csslic/css/fonts/InterDisplay-BoldItalic.woff2") format("woff2");
+    src: url("/css/fonts/InterDisplay-BoldItalic.woff2") format("woff2");
 }
 
 @font-feature-values InterVariable {
@@ -322,6 +322,10 @@ fieldset {
             border-radius: 0.25rem;
             border: 1px solid rgb(50, 50, 140);
             padding: 0.25rem;
+        }
+
+        & p {
+            margin-block: 0;
         }
     }
 

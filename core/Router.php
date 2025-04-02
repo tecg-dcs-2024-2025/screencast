@@ -21,7 +21,7 @@ class Router
     {
         [$controller_name, $action] = $this->get_matching_route();
 
-        $controller = new $controller_name;
+        $controller = new $controller_name();
         $controller->$action();
     }
 

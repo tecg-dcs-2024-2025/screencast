@@ -1,7 +1,8 @@
 <?php
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 
-$capsule = new Capsule;
+$capsule = new Capsule();
 
 $capsule->addConnection([
     'driver' => 'sqlite',
@@ -14,9 +15,10 @@ $capsule->addConnection([
     'prefix' => '',
 ]);
 
-use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
-$capsule->setEventDispatcher(new Dispatcher(new Container));
+use Illuminate\Events\Dispatcher;
+
+$capsule->setEventDispatcher(new Dispatcher(new Container()));
 
 $capsule->setAsGlobal();
 

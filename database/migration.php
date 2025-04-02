@@ -1,8 +1,8 @@
 <?php
 
-require __DIR__."/../vendor/autoload.php";
+require __DIR__.'/../vendor/autoload.php';
 define('DATABASE_PATH', __DIR__.'/../database.sqlite');
-require __DIR__."/../core/database/dbconnection.php";
+require __DIR__.'/../core/database/dbconnection.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 

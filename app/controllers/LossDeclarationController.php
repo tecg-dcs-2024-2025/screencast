@@ -35,10 +35,11 @@ class LossDeclarationController
             'country' => 'in_collection:countries',
         ]);
 
-        PetOwner::upsert([
+        PetOwner::upsert(
+            [
             [
                 'email' => $_REQUEST['email'],
-                'phone' => $_REQUEST['phone']
+                'phone' => $_REQUEST['phone'],
             ],
         ],
             uniqueBy: ['email'],
@@ -52,7 +53,7 @@ class LossDeclarationController
 
     public function show()
     {
-        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
+        if (! isset($_GET['id']) || ! is_numeric($_GET['id'])) {
             Response::abort(Response::BAD_REQUEST);
         }
         // Si vous êtes très très inquiet, mais le code avant fait les vérifications nécessaires

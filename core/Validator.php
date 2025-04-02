@@ -84,7 +84,7 @@ class Validator
         if (
             array_key_exists($field_name, $_REQUEST) &&
             trim($_REQUEST[$field_name]) !== '' &&
-            !in_array($_REQUEST[$field_name], $collection, true)
+            ! in_array($_REQUEST[$field_name], $collection, true)
         ) {
             $_SESSION['errors'][$field_name] =
                 sprintf(MESSAGES['in_collection'], $field_name, $collection_name);
