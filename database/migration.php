@@ -36,7 +36,7 @@ Capsule::schema()->dropIfExists('pets');
 Capsule::schema()->create('pets', function ($table) {
     $table->id();
     $table->string('name');
-    $table->string('chip')->nullable();
+    $table->string('chip');
     $table->boolean('gender')->nullable();
     $table->smallInteger('age')->nullable();
     $table->string('race')->nullable();

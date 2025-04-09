@@ -182,9 +182,7 @@
                     </div>
                     <!-- Pet chip -->
                     <div class="field">
-                        <label for="pet-chip">Puce
-                            <br><small>Obligatoire pour les chiens</small>
-                        </label>
+                        <label for="pet-chip"><abbr title="requis">*</abbr>&nbsp;Puce</label>
                         <input type="text"
                                value="<?= $_SESSION['old']['pet-chip'] ?? '' ?>"
                                name="pet-chip"
