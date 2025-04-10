@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'BE' => 'Belgique',
-    'LU' => 'Luxembourg',
+    'BE' => 'Belgium',
+    'LU' => 'Luxemburg',
     'FR' => 'France',
 ];
