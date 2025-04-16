@@ -2,8 +2,7 @@
     <h1>{!! $page_header  !!}</h1>
     <form action="/loss-declaration"
           method="post">
-        <?php
-        csrf() ?>
+        @csrfToken()
         <fieldset>
             <legend>Vos coordonn&eacute;es</legend>
             <div class="fields">

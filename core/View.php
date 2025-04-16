@@ -6,6 +6,8 @@ use eftec\bladeone\BladeOne;
 
 class View extends BladeOne
 {
+    use \Tecgdcs\Concerns\View;
+
     private const VIEW_DIR = __DIR__.'/../resources/views';
     private const CACHE_DIR = __DIR__.'/../storage/cache';
 
