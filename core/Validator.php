@@ -2,6 +2,7 @@
 
 namespace Tecgdcs;
 
+use Illuminate\Database\Capsule\Manager;
 use Tecgdcs\Exceptions\ValidationRuleNotFoundException;
 
 class Validator
@@ -9,7 +10,7 @@ class Validator
     public static function required(string $field_name): bool
     {
         if (
-            ! array_key_exists($field_name, $_REQUEST)
+            !array_key_exists($field_name, $_REQUEST)
             || trim($_REQUEST[$field_name]) === ''
         ) {
             $_SESSION['errors'][$field_name] =
@@ -26,7 +27,7 @@ class Validator
         if (
             array_key_exists($field_name, $_REQUEST) &&
             trim($_REQUEST[$field_name]) !== '' &&
-            ! filter_var(trim($_REQUEST[$field_name]), FILTER_VALIDATE_EMAIL)
+            !filter_var(trim($_REQUEST[$field_name]), FILTER_VALIDATE_EMAIL)
         ) {
             $_SESSION['errors'][$field_name] = sprintf(MESSAGES['email'], $field_name);
 
@@ -43,7 +44,7 @@ class Validator
             trim($_REQUEST[$field_name]) !== '' &&
             (
                 strlen($_REQUEST[$field_name]) < 9 ||
-                ! is_numeric(
+                !is_numeric(
                     str_replace(['+', '(', ')', ' '], '', $_REQUEST[$field_name])
                 )
             )
@@ -78,17 +79,14 @@ class Validator
         return false;
     }
 
-    public static function in_collection(string $field_name, string $collection_name): bool
+    public static function exists(string $field_name, string $table, string $column): bool
     {
-        $collection = require CONFIG_DIR.'/'.$collection_name.'.php';
-        if (
-            array_key_exists($field_name, $_REQUEST) &&
-            trim($_REQUEST[$field_name]) !== '' &&
-            ! in_array($_REQUEST[$field_name], $collection, true)
-        ) {
+        $item = Manager::table($table)
+            ->where($column, $_REQUEST[$field_name])
+            ->first();
+        if (!$item) {
             $_SESSION['errors'][$field_name] =
-                sprintf(MESSAGES['in_collection'], $field_name, $collection_name);
-
+                sprintf(MESSAGES['in_collection'], $field_name, $table);
             return false;
         }
 
@@ -121,8 +119,11 @@ class Validator
                 if (str_contains($method, ':')) {
                     [$method, $param1] = explode(':', $method);
                 }
+                if (str_contains($param1, ',')) {
+                    [$param1, $param2] = explode(',', $param1);
+                }
 
-                if (! method_exists(__CLASS__, $method)) {
+                if (!method_exists(__CLASS__, $method)) {
                     throw new ValidationRuleNotFoundException($method);
                 }
                 self::$method($field_name, $param1, $param2);

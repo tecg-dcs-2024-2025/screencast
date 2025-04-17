@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use JetBrains\PhpStorm\NoReturn;
 use Tecgdcs\Response;
 use Tecgdcs\Validator;
+use Tecgdcs\View;
 
 class LossDeclarationController
 {
@@ -16,8 +17,8 @@ class LossDeclarationController
     {
         $countries = Country::all();
         $pet_types = PetType::all();
-
-        require VIEW_DIR.'/lossdeclaration/create.php';
+        $title = "J’ai perdu mon animal";
+        View::make('lossdeclaration.create', compact('pet_types', 'countries', 'title'));
     }
 
     #[NoReturn]
@@ -32,16 +33,16 @@ class LossDeclarationController
             'email' => 'required|email',
             'vemail' => 'required|same:email',
             'phone' => 'phone',
-            'country' => 'in_collection:countries',
+            'country' => 'exists:countries,code',
         ]);
 
         PetOwner::upsert(
             [
-            [
-                'email' => $_REQUEST['email'],
-                'phone' => $_REQUEST['phone'],
+                [
+                    'email' => $_REQUEST['email'],
+                    'phone' => $_REQUEST['phone'],
+                ],
             ],
-        ],
             uniqueBy: ['email'],
             update: ['phone']
         );
@@ -53,11 +54,11 @@ class LossDeclarationController
 
     public function show()
     {
-        if (! isset($_GET['id']) || ! is_numeric($_GET['id'])) {
+        if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
             Response::abort(Response::BAD_REQUEST);
         }
         // Si vous êtes très très inquiet, mais le code avant fait les vérifications nécessaires
-        $id = (int) trim($_GET['id']);
+        $id = (int)trim($_GET['id']);
 
         try {
             $pet_owner = PetOwner::findOrFail($id);
@@ -65,6 +66,6 @@ class LossDeclarationController
             Response::abort();
         }
         // Analyser la query string pour savoir quelle déclaration afficher
-        require VIEW_DIR.'/lossdeclaration/show.php';
+        View::make('lossdeclaration.show');
     }
 }
