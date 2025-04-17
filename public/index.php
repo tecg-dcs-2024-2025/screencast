@@ -5,7 +5,9 @@ require __DIR__.'/../core/helpers/functions.php';
 define('DATABASE_PATH', __DIR__.'/../database.sqlite');
 require __DIR__.'/../core/database/dbconnection.php';
 
-define('VIEW_DIR', __DIR__.'/../resources/views');
+/*define('VIEW_DIR', __DIR__.'/../resources/views');
+define('CACHE_DIR', __DIR__.'/../storage/cache');*/
+
 define('CONFIG_DIR', __DIR__.'/../config');
 define('LANG_DIR', __DIR__.'/../lang');
 /**

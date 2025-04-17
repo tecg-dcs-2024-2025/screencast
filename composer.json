@@ -6,8 +6,10 @@
   "autoload": {
     "psr-4": {
       "Tecgdcs\\": "core/",
+      "Tecgdcs\\Concerns\\": "core/concerns",
       "Animal\\": "app/",
-      "Animal\\Models\\": "app/models"
+      "Animal\\Models\\": "app/models",
+      "Animal\\Controllers\\": "app/controllers"
     }
   },
   "authors": [
@@ -20,7 +22,8 @@
     "php": "^8.4",
     "illuminate/database": "^12.6",
     "illuminate/events": "^12.6",
-    "guzzlehttp/guzzle": "^7.9"
+    "guzzlehttp/guzzle": "^7.9",
+    "eftec/bladeone": "^4.18"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
