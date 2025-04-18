@@ -1,3 +1,5 @@
+<h1>Identifiez-vous</h1>
+<p>Le faire vous donnera accès à votre dashboard pour administrer les déclarations de perte</p>
 @component('layouts.app',['title'=>'Identifiez-vous'])
     <form action="/login"
           method="post">
@@ -27,4 +29,5 @@
         Identifiez-moi&nbsp;!
         @endcomponent
     </form>
+    <a href="/register">S’inscrire</a>
 @endcomponent
