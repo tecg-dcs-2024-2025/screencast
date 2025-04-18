@@ -6,6 +6,14 @@ require __DIR__.'/../core/database/dbconnection.php';
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 
+Capsule::schema()->dropIfExists('users');
+Capsule::schema()->create('users', function ($table) {
+    $table->id();
+    $table->string('email')->unique();
+    $table->string('password');
+    $table->timestamps();
+});
+
 Capsule::schema()->dropIfExists('countries');
 Capsule::schema()->create('countries', function ($table) {
     $table->id();

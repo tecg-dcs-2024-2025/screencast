@@ -26,4 +26,9 @@ return [
         'verb' => 'GET',
         'action' => [Animal\Controllers\AuthenticatedSessionController::class, 'create'],
     ],
+    [
+        'uri' => '/login',
+        'verb' => 'POST',
+        'action' => [Animal\Controllers\AuthenticatedSessionController::class, 'store'],
+    ],
 ];
