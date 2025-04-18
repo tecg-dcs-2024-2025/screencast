@@ -11,8 +11,16 @@ use Animal\Models\Loss;
 use Animal\Models\Pet;
 use Animal\Models\PetOwner;
 use Animal\Models\PetType;
+use Animal\Models\User;
 
 $faker = Faker\Factory::create();
+
+User::query()->truncate();
+User::create([
+    'email' => 'dominique.vilain@hepl.be',
+    'password' => password_hash('change_this', PASSWORD_BCRYPT),
+]);
+
 
 $countries_csv = __DIR__.'/countries.csv';
 $file_handle = fopen($countries_csv, 'rb');

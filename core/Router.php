@@ -29,12 +29,11 @@ class Router
     {
         $routes_f = array_filter(
             $this->routes,
-            fn ($route) => strtoupper($this->verb) === strtoupper($route['verb'])
+            fn($route) => strtoupper($this->verb) === strtoupper($route['verb'])
                 && strtoupper($this->uri) === strtoupper($route['uri'])
         );
         if (empty($routes_f)) {
-            http_response_code(404);
-            exit();
+            Response::abort();
         }
 
         return array_values($routes_f)[0]['action'];
