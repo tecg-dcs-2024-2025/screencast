@@ -19,6 +19,11 @@ return [
     [
         'uri' => '/loss-declaration',
         'verb' => 'GET',
+        'action' => [Animal\Controllers\LossDeclarationController::class, 'index'],
+    ],
+    [
+        'uri' => '/loss-declaration/show',
+        'verb' => 'GET',
         'action' => [Animal\Controllers\LossDeclarationController::class, 'show'],
     ],
     [
@@ -30,5 +35,10 @@ return [
         'uri' => '/login',
         'verb' => 'POST',
         'action' => [Animal\Controllers\AuthenticatedSessionController::class, 'store'],
+    ],
+    [
+        'uri' => '/dashboard',
+        'verb' => 'GET',
+        'action' => [Animal\Controllers\DashboardController::class, 'index'],
     ],
 ];
