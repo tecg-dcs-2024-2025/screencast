@@ -23,4 +23,11 @@ class Loss extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'lost_at' => 'datetime',
+        ];
+    }
 }

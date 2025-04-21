@@ -77,11 +77,15 @@ foreach ($pet_types as $code) {
 PetOwner::query()->truncate();
 $belgium = Country::where('code', 'BE')->first();
 $belgium->pet_owners()->create([
+    'first_name' => 'Dominique',
+    'last_name' => 'Vilain',
     'email' => 'dom@vil.be',
 ]);
 
 for ($i = 1; $i <= 5; $i++) {
     PetOwner::create([
+        'first_name' => $faker->firstName(),
+        'last_name' => $faker->lastName(),
         'email' => $faker->email(),
         'country_id' => Country::all()->random()->id,
     ]);

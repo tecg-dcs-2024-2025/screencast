@@ -9,7 +9,11 @@
             </tr>
             @foreach($losses as $loss)
                 <tr>
-                    <td><a href="/loss-declaration/show?id={!! $loss->id !!}">{!! $loss->lost_at !!}</a></td>
+                    <td>
+                        <a href="/loss-declaration/show?id={!! $loss->id !!}">
+                            {!! $loss->lost_at->toFormattedDateString() !!}
+                        </a>
+                    </td>
                     <td>{!! $loss->pet_owner->name !!}</td>
                     <td>{!! $loss->pet->name !!}</td>
                 </tr>
