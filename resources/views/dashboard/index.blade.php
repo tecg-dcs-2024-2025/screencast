@@ -11,7 +11,7 @@
                 <tr>
                     <td>
                         <a href="/loss-declaration/show?id={!! $loss->id !!}">
-                            {!! $loss->lost_at->toFormattedDateString() !!}
+                            {!! $loss->lost_at->locale('fr')->isoFormat('Do MMMM YYYY') !!}
                         </a>
                     </td>
                     <td>{!! $loss->pet_owner->name !!}</td>
