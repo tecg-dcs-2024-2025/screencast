@@ -10,11 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Pet extends Model
 {
     protected $fillable =
-        ['name', 'chip', 'tatoo', 'age', 'pet_type_id', 'race', 'gender', 'description', 'photo_path'];
-
-    protected $casts = [
-        'tatoo' => 'array'
-    ];
+        ['name', 'chip', 'tattoo', 'age', 'pet_type_id', 'race', 'gender', 'description', 'photo_path'];
 
     public function pet_type(): BelongsTo
     {
@@ -29,5 +25,10 @@ class Pet extends Model
     public function losses(): HasMany
     {
         return $this->hasMany(Loss::class);
+    }
+
+    protected function casts(): array
+    {
+        return ['tattoo' => 'array',];
     }
 }

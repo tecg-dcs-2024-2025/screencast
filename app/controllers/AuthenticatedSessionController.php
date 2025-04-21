@@ -9,12 +9,12 @@ use Tecgdcs\View;
 
 class AuthenticatedSessionController
 {
-    public function create()
+    public function create(): void
     {
         View::make('auth.login');
     }
 
-    public function store()
+    public function store(): void
     {
         check_csrf_token();
 

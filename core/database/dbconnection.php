@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Container\Container;
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
 
 $capsule = new Capsule();
 
@@ -14,9 +16,6 @@ $capsule->addConnection([
     'collation' => 'utf8_unicode_ci',
     'prefix' => '',
 ]);
-
-use Illuminate\Container\Container;
-use Illuminate\Events\Dispatcher;
 
 $capsule->setEventDispatcher(new Dispatcher(new Container()));
 

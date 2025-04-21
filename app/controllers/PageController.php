@@ -4,7 +4,7 @@ namespace Animal\Controllers;
 
 class PageController
 {
-    public function welcome()
+    public function welcome(): void
     {
         echo 'welcome';
     }

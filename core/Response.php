@@ -6,17 +6,17 @@ use JetBrains\PhpStorm\NoReturn;
 
 class Response
 {
-    public const BAD_REQUEST = 400;
-    public const NOT_FOUND = 404;
-    public const SEE_OTHER = 303;
-    public const SERVER_ERROR = 500;
-    public const UNAUTHORIZED = 401;
+    public const int BAD_REQUEST = 400;
+    public const int NOT_FOUND = 404;
+    public const int SEE_OTHER = 303;
+    public const int SERVER_ERROR = 500;
+    public const int UNAUTHORIZED = 401;
 
     #[NoReturn]
     public static function abort($code = self::NOT_FOUND): void
     {
         http_response_code($code);
-        View::make("codes.{$code}");
+        View::make("codes.$code");
         exit;
     }
 

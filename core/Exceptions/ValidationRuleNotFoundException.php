@@ -2,6 +2,8 @@
 
 namespace Tecgdcs\Exceptions;
 
-class ValidationRuleNotFoundException extends \Exception
+use Exception;
+
+class ValidationRuleNotFoundException extends Exception
 {
 }

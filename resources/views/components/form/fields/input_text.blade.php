@@ -5,7 +5,11 @@
            name="{!! $field_name !!}"
            id="{!! $field_name !!}"
            placeholder="{!! $placeholder ?? '' !!}"
-            {!! $required ?? '' !!}
+           {!! $required ?? '' !!}
+           @isset($minlength) minlength="{!! $minlength !!}"
+           @endisset
+           @isset($maxlength) maxlength="{!! $maxlength !!}"
+            @endisset
     >
     @isset($_SESSION['errors'][$field_name])
         <div class="error"><p>{!! $_SESSION['errors'][$field_name]  !!}</p></div>

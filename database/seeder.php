@@ -12,6 +12,7 @@ use Animal\Models\Pet;
 use Animal\Models\PetOwner;
 use Animal\Models\PetType;
 use Animal\Models\User;
+use Carbon\Carbon;
 
 $faker = Faker\Factory::create();
 
@@ -39,7 +40,7 @@ foreach ($available_languages as $cca2 => $translation_header) {
 
 // Préparer les chaînes à écrire dans les fichiers php. On commence par le code qui définit un array
 foreach (array_keys($available_languages) as $lang_code) {
-    $$lang_code = '<?php return ['.PHP_EOL;
+    $$lang_code = "<?php return [".PHP_EOL;
 }
 // Pour la db, on aura d'un besoin d'un array des cca2 qui sont dans le csv
 $cca2s = [];
@@ -50,7 +51,8 @@ while ($country_row = fgetcsv($file_handle, 1000, escape: '')) {
         // Pour chaque langue, on peut alors compléter l'array pour le pays en cours.
         foreach (array_keys($available_languages) as $lang_code) {
             $cca2 = $country_row[$cca2_index];
-            $$lang_code .= '"'.$cca2.'" => "'.$country_row[$header_indexes[$lang_code]].'",'.PHP_EOL;
+            $$lang_code .= "'".$cca2."' => '".str_replace("'", "\'",
+                    $country_row[$header_indexes[$lang_code]])."',".PHP_EOL;
         }
         // Et on n'oublie pas d'ajouter le cca2 du pays en cours dans l'array des cca2 dont on aura besoin dans la db
         $cca2s[] = $country_row[$cca2_index];
@@ -58,7 +60,7 @@ while ($country_row = fgetcsv($file_handle, 1000, escape: '')) {
 }
 // On finalise le code php qu'on doit écrire dans les fichiers, et on l'écrit.
 foreach (array_keys($available_languages) as $lang_code) {
-    $$lang_code .= '];'.PHP_EOL;
+    $$lang_code .= "];".PHP_EOL;
     file_put_contents(__DIR__.'/../lang/'.$lang_code.'/countries.php', $$lang_code);
 }
 
@@ -97,7 +99,7 @@ $bird = PetType::where('code', 'bird')->first();
 $bird->pets()->create([
     'name' => 'titi',
     'chip' => $faker->ean8(),
-    'tatoo' => ['position' => 'ER', 'code' => $faker->ean8()]
+    'tattoo' => ['position' => 'ER', 'code' => $faker->ean8()]
 ]);
 
 Pet::create([
@@ -120,8 +122,8 @@ $rocky = Pet::where('name', 'rocky')->first();
 $dominique = PetOwner::where('email', 'dom@vil.be')->first();
 $not_dominique = PetOwner::where('email', '!=', 'dom@vil.be')->first();
 $france = Country::where('code', 'FR')->first();
-$lost_at_dom = \Carbon\Carbon::now()->subMonths(2);
-$lost_at_not_dom = \Carbon\Carbon::now()->subMonths(1);
+$lost_at_dom = Carbon::now()->subMonths(2);
+$lost_at_not_dom = Carbon::now()->subMonths(1);
 $postal_code = 75675;
 
 Loss::create([
