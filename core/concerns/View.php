@@ -1,6 +1,6 @@
 <?php
 
-namespace Tecgdcs\concerns;
+namespace Tecgdcs\Concerns;
 
 use Random\RandomException;
 

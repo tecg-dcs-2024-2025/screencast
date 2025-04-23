@@ -13,6 +13,10 @@ class View extends BladeOne
 
     public static function make(string $template, array $data = [])
     {
-        echo new self(self::VIEW_DIR, self::CACHE_DIR, self::MODE_DEBUG)->run($template, $data);
+        $instance = new self(self::VIEW_DIR, self::CACHE_DIR, self::MODE_DEBUG);
+        if (isset($_SESSION['user'])) {
+            $instance->setAuth($_SESSION['user']->email);
+        }
+        echo $instance->run($template, $data);
     }
 }

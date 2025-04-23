@@ -7,6 +7,7 @@
     "psr-4": {
       "Tecgdcs\\": "core/",
       "Tecgdcs\\Contracts\\": "core/contracts/",
+      "Tecgdcs\\Concerns\\": "core/concerns/",
       "Animal\\": "app/",
       "Animal\\Models\\": "app/models/",
       "Animal\\Controllers\\": "app/controllers/",
