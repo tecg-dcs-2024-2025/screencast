@@ -16,8 +16,6 @@ class AuthenticatedSessionController
 
     public function store(): void
     {
-        check_csrf_token();
-
         Validator::check([
             'email' => 'required|email',
             'password' => 'required',

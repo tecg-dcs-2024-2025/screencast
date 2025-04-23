@@ -19,10 +19,17 @@ class Router
 
     public function route(): void
     {
-        [$controller_name, $action] = $this->get_matching_route();
+        $route = $this->get_matching_route();
+        [$controller_name, $method] = $route['action'];
 
+        if (!empty($route['middlewares'])) {
+            foreach ($route['middlewares'] as $middleware) {
+                new $middleware()->handle();
+            }
+        }
+        
         $controller = new $controller_name();
-        $controller->$action();
+        $controller->$method();
     }
 
     private function get_matching_route(): ?array
@@ -36,6 +43,6 @@ class Router
             Response::abort();
         }
 
-        return array_values($routes_f)[0]['action'];
+        return array_values($routes_f)[0];
     }
 }
