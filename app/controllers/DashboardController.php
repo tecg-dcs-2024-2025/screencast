@@ -8,7 +8,7 @@ use Tecgdcs\View;
 
 class DashboardController
 {
-    public function index()
+    public function index(): void
     {
         if (!isset($_SESSION['user'])) {
             Response::abort(Response::UNAUTHORIZED);

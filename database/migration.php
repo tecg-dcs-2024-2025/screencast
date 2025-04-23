@@ -48,7 +48,7 @@ Capsule::schema()->create('pets', function ($table) {
     $table->boolean('gender')->nullable();
     $table->smallInteger('age')->nullable();
     $table->string('race')->nullable();
-    $table->string('tatoo')->nullable();
+    $table->string('tattoo')->nullable();
     $table->text('description')->nullable();
     $table->string('photo_path')->nullable();
     $table->foreignId('pet_type_id')

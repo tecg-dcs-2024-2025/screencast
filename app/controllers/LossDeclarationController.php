@@ -47,25 +47,26 @@ class LossDeclarationController
             update: ['phone']
         );
 
-        $pet_owner = PetOwner::latest('updated_at')->first();
 
-        Response::redirect('/loss-declaration?id='.$pet_owner->id);
+        Response::redirect('/loss-declaration/show?id='.$loss->id);
     }
 
-    public function show()
+    public function show(): void
     {
         if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
             Response::abort(Response::BAD_REQUEST);
         }
         // Si vous êtes très très inquiet, mais le code avant fait les vérifications nécessaires
-        $id = (int)trim($_GET['id']);
+        $id = (int) trim($_GET['id']);
 
         try {
             $pet_owner = PetOwner::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             Response::abort();
         }
-        // Analyser la query string pour savoir quelle déclaration afficher
-        View::make('lossdeclaration.show');
+
+        $title = 'Détails de la déclaration de perte';
+
+        View::make('lossdeclaration.show', compact('title'));
     }
 }

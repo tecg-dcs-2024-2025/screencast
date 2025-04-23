@@ -86,7 +86,7 @@ class Validator
             ->first();
         if (!$item) {
             $_SESSION['errors'][$field_name] =
-                sprintf(MESSAGES['in_collection'], $field_name, $table);
+                sprintf(MESSAGES['exists'], $field_name, $table);
             return false;
         }
 
