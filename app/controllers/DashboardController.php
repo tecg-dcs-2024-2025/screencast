@@ -10,10 +10,6 @@ class DashboardController
 {
     public function index(): void
     {
-        if (!isset($_SESSION['user'])) {
-            Response::abort(Response::UNAUTHORIZED);
-        }
-
         $title = 'Dashboard';
         $losses = Loss::all();
 

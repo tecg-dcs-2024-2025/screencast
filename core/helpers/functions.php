@@ -3,16 +3,6 @@
 use JetBrains\PhpStorm\NoReturn;
 use Tecgdcs\Response;
 
-if (!function_exists('check_csrf_token')) {
-    #[NoReturn]
-    function check_csrf_token(): void
-    {
-        if ($_POST['_csrf'] !== $_SESSION['csrf_token']) {
-            Response::abort();
-        }
-    }
-}
-
 if (!function_exists('info')) {
     #[NoReturn]
     function info($message = 'a random message'): void

@@ -6,9 +6,11 @@
   "autoload": {
     "psr-4": {
       "Tecgdcs\\": "core/",
+      "Tecgdcs\\Contracts\\": "core/contracts/",
       "Animal\\": "app/",
-      "Animal\\Models\\": "app/models",
-      "Animal\\Controllers\\": "app/controllers"
+      "Animal\\Models\\": "app/models/",
+      "Animal\\Controllers\\": "app/controllers/",
+      "Animal\\Middlewares\\": "app/middlewares/"
     }
   },
   "authors": [
