@@ -1,7 +1,7 @@
 <div class="field">
     <label for="{!! $field_name !!}">{!! $slot !!}</label>
-    <input type="{!! $type !!}"
-           value="{!! $_SESSION['old'][$field_name] ?? '' !!}"
+    <input type="{!! $type ?? 'text' !!}"
+           value="{!! $value ?? $_SESSION['old'][$field_name] ?? '' !!}"
            name="{!! $field_name !!}"
            id="{!! $field_name !!}"
            placeholder="{!! $placeholder ?? '' !!}"

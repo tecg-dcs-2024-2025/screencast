@@ -60,8 +60,7 @@ class LossDeclarationController
 
     public function show(): void
     {
-        // Si vous êtes très très inquiet, mais le code avant fait les vérifications nécessaires
-        $id = (int) trim($_GET['id']);
+        $id = (int) trim($_REQUEST['id']);
 
         try {
             $pet_owner = PetOwner::findOrFail($id);

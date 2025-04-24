@@ -10,7 +10,7 @@ class RequestRequiresId implements Middleware
 
     public function handle(): void
     {
-        if (empty($_GET['id']) || !is_numeric($_GET['id'])) {
+        if (empty($_REQUEST['id']) || !is_numeric($_REQUEST['id'])) {
             Response::abort(Response::BAD_REQUEST);
         }
     }

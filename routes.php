@@ -56,4 +56,16 @@ return [
         'action' => [Animal\Controllers\AuthenticatedSessionController::class, 'destroy'],
         'middlewares' => [Auth::class, Csrf::class]
     ],
+    [
+        'uri' => '/pet/edit',
+        'verb' => 'GET',
+        'action' => [Animal\Controllers\PetController::class, 'edit'],
+        'middlewares' => [Auth::class, RequestRequiresId::class]
+    ],
+    [
+        'uri' => '/pet/edit',
+        'verb' => 'POST',
+        'action' => [Animal\Controllers\PetController::class, 'update'],
+        'middlewares' => [Auth::class, RequestRequiresId::class]
+    ],
 ];

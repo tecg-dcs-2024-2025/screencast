@@ -15,7 +15,7 @@
                         </a>
                     </td>
                     <td>{!! $loss->pet_owner->name !!}</td>
-                    <td>{!! $loss->pet->name !!}</td>
+                    <td><a href="/pet/edit?id={!! $loss->pet->id !!}">{!! $loss->pet->name !!}</a></td>
                 </tr>
             @endforeach
         </table>
