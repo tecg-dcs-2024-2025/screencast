@@ -1,5 +1,5 @@
 @component('layouts.app')
-    <h1>Dashboard</h1>
+    <h1>Les déclarations de perte</h1>
     @if($losses)
         <table>
             <tr>

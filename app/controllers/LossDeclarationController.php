@@ -3,6 +3,7 @@
 namespace Animal\Controllers;
 
 use Animal\Models\Country;
+use Animal\Models\Loss;
 use Animal\Models\PetOwner;
 use Animal\Models\PetType;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -13,6 +14,14 @@ use Tecgdcs\View;
 
 class LossDeclarationController
 {
+    public function index(): void
+    {
+        $title = 'Dashboard';
+        $losses = Loss::all();
+
+        View::make('lossdeclaration.index', compact('title', 'losses'));
+    }
+
     public function create()
     {
         $countries = Country::all();

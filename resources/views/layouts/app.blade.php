@@ -31,14 +31,8 @@
               href="/css/main.css">
     </head>
     <body>
-        <div role="navigation">
-            @auth
-                <p>Connecté</p>
-            @endauth
-            @guest
-                <p>Non Connecté</p>
-            @endguest
-        </div>
+        @component('layouts.navigation')
+        @endcomponent
         {!! $slot !!}
     </body>
 </html>

@@ -1,7 +1,25 @@
 <?php
 
 use JetBrains\PhpStorm\NoReturn;
+use Random\RandomException;
 use Tecgdcs\Response;
+
+if (!function_exists('csrf_token')) {
+    /**
+     * @throws RandomException
+     */
+    #[NoReturn]
+    function csrf_token(): string
+    {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+
+        return <<<HTML
+<input name="_csrf" type="hidden" value="{$_SESSION['csrf_token']}">
+HTML.PHP_EOL;
+    }
+}
 
 if (!function_exists('info')) {
     #[NoReturn]

@@ -2,7 +2,7 @@
     <h1>Déclaration de perte d'animal</h1>
     <form action="/loss-declaration"
           method="post">
-        @csrfToken()
+        {!! csrf_token() !!}
         <fieldset>
             <legend>Vos coordonn&eacute;es</legend>
             <div class="fields">
@@ -246,7 +246,7 @@
             </div>
         </fieldset>
         @component('components.form.buttons.normal')
-        D&eacute;clarer la perte de mon animal
+            D&eacute;clarer la perte de mon animal
         @endcomponent
     </form>
 @endcomponent

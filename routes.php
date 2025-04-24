@@ -27,6 +27,12 @@ return [
         'middlewares' => [Auth::class]
     ],
     [
+        'uri' => '/dashboard',
+        'verb' => 'GET',
+        'action' => [Animal\Controllers\LossdeclarationController::class, 'index'],
+        'middlewares' => [Auth::class]
+    ],
+    [
         'uri' => '/loss-declaration/show',
         'verb' => 'GET',
         'action' => [Animal\Controllers\LossDeclarationController::class, 'show'],
@@ -45,9 +51,9 @@ return [
         'middlewares' => [Guest::class, Csrf::class]
     ],
     [
-        'uri' => '/dashboard',
-        'verb' => 'GET',
-        'action' => [Animal\Controllers\DashboardController::class, 'index'],
-        'middlewares' => [Auth::class]
+        'uri' => '/logout',
+        'verb' => 'POST',
+        'action' => [Animal\Controllers\AuthenticatedSessionController::class, 'destroy'],
+        'middlewares' => [Auth::class, Csrf::class]
     ],
 ];

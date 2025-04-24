@@ -36,4 +36,11 @@ class AuthenticatedSessionController
         $_SESSION['user'] = $user;
         Response::redirect('/dashboard');
     }
+
+    public function destroy(): void
+    {
+        $_SESSION = [];
+        session_destroy();
+        Response::redirect('/');
+    }
 }
